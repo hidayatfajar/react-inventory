@@ -1,0 +1,16 @@
+.bagan{
+    position: relative;
+    margin: auto;
+    margin-top: 8%;
+    margin-left: 24.5%;
+    display: flex;
+    flex-direction: column;
+    /* height: 50vh;
+    width: 60vw; */
+
+
+}
+
+body {
+    background-color: #f5f8fa;
+}

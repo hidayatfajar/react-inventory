@@ -1,0 +1,46 @@
+body {
+    width: 100%;
+}
+
+.wrapper-login {
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    flex-direction: column;
+    padding: 10px;
+    height: auto;
+    margin-left: 32%;
+    margin-top: 120px;
+}
+
+.text-center {
+    margin-top: 20px;
+    
+}
+
+.sub {
+    text-align: center;
+}
+
+.vl {
+    position: absolute;
+    left: 5%;
+    border: 1px solid #ddd;
+    width: 35%;
+    height: 0;
+  }
+.vl1 {
+    position: absolute;
+    left: 60%;
+    border: 1px solid #ddd;
+    width: 35%;
+    height: 0;
+}
+.vl-innertext {
+    position: absolute;
+    top: 79%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 8px 10px;
+    justify-content: center;
+  }

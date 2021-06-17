@@ -1,0 +1,16 @@
+.wrapper {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 10px;
+    height: auto;
+    margin-left: 32%;
+    margin-top: 7%;
+     
+}
+
+.judul {
+    margin-top: 18px;
+    text-align: center;
+}

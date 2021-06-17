@@ -1,0 +1,15 @@
+.back{
+    position: relative;
+    margin: auto;
+    margin-top: 10%;
+    margin-left: 18%;
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+
+}
+.side{
+    height: 91.5vh;
+    color: white;
+    background-color: white;
+}
