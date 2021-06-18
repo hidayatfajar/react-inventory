@@ -48,7 +48,7 @@ export default class Welcome extends Component {
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="https://placeimg.com/700/313/tech/greyscale"
+      src="https://placeimg.com/700/293/tech/greyscale"
       alt="First slide"
     />
     <Carousel.Caption>
@@ -59,7 +59,7 @@ export default class Welcome extends Component {
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="https://placeimg.com/700/313/tech"
+      src="https://placeimg.com/700/293/tech"
       alt="Second slide"
     />
 
@@ -71,7 +71,7 @@ export default class Welcome extends Component {
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="https://placeimg.com/700/313/tech/grayscale"
+      src="https://placeimg.com/700/293/tech/grayscale"
       alt="Third slide"
     />
     <Carousel.Caption>
