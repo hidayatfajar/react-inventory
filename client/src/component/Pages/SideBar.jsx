@@ -51,7 +51,7 @@ render() {
             <h5 className="pjl"><FontAwesomeIcon icon={faStoreAlt} />{' '}Penjualan  </h5>
           </Link>
 
-          <Link to="#pembeli" >
+          <Link to="/pembelian" >
             <h5 className="pbl"><FontAwesomeIcon icon={faShoppingBag} />{' '}Pembelian </h5>
           </Link>
         </div>
