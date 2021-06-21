@@ -1,84 +1,242 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Container, Button, Col, Row, div } from 'react-bootstrap'
-
-import './Pembelian.css'
-
+import SimpleReactValidator from 'simple-react-validator';
+import { BrowserRouter as Router, Route, Redirect, Switch, Link } from "react-router-dom";
+import { Button, Navbar, Nav, Container, Col, Row, Form, NavDropdown, Card } from "react-bootstrap";
+import paginationFactory from "react-bootstrap-table2-paginator";
+import BootstrapTable from "react-bootstrap-table-next";
+import ToolkitProvider, { SearchBar, Search, defaultSorted } from "react-bootstrap-table2-toolkit";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit, faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2'
+import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
 
 export default class TambahPembelian extends Component {
-    state = {
-        pembelian: {
-            nama_barang : '',
-            satuan : '',
-            harga_beli : '',
-            jumlah : '',
-            tgl_pembelian : '',
-            kd_supplier : '',
-            status : ''
-        }
+    constructor(props) {
+        super(props);
+        this.validator = new SimpleReactValidator({autoForceUpdate: this});
+
+    this.state = {
+        nama_barang: '',
+        satuan: '',
+        harga_beli: '',
+        jumlah: '',
+        tgl_pembelian: '',
+        kd_supplier: '',
+        status: ''
+      };
     }
 
-    postDataToAPI = () => {
-        axios.post('http://localhost:8000/pembelian', this.state.pembelian)
-            .then((res) => {
-                console.log(res);
-                // this.getPostAPI();
-            }, (err) => {
-                console.log('error', err);
-            })
-
-    }
-    handleFormChange = (event) => {
-        // console.log('form change', event.target)
-        let pembelianNew = { ...this.state.pembelian };
-        pembelianNew[event.target.name] = event.target.value;
-        this.setState({
-            pembelian: pembelianNew
-            // }, () => {
-            // console.log('value obj formBlogPost: ', this.state.formBlogPost);
-        })
-    }
-
-    handleSubmit = (e) => {
-        this.postDataToAPI();
-
+    handleChange = e => {
         e.preventDefault();
-    }
-
+        this.setState({
+          [e.target.name]: e.target.value
+        })
+      }
+    
+      handleSubmit = e => {
+        e.preventDefault();
+        console.log(this.state)
+        axios.post("http://localhost:8000/pembelian", this.state)
+          .then((result) => {
+               
+            if (this.validator.allValid()) {
+              e.preventDefault();
+               Swal.fire(
+                'Success',
+                'Your data has been submitted!',
+                'success'
+              );
+              this.setState({
+                  nama_barang: '',
+                satuan: '',
+                harga_beli: '',
+                jumlah: '',
+                tgl_pembelian: '',
+                kd_supplier: '',
+                status: ''           
+              })
+              this.validator.hideMessages();
+              // this.props.onSubmit(this.state);
+              console.log(this.state);
+            } else {
+              this.validator.showMessages();
+              // rerender to show messages for the first time
+              // you can use the autoForceUpdate option to do this automatically`
+              this.forceUpdate();
+            }
+            // this.props.history.push("/admin")
+            console.log(result.data)
+            console.log(this.state)
+          })
+          .catch(err => {
+            Swal.fire(
+              'error',
+              'Cant Add New Barang!',
+              'error'
+            );
+            console.log(err)
+          })
+      };
+    
+    
     render() {
         return (
             <div>
-                
                 <div className="back">
-                        <p className="title">Tambah Data Pembelian</p>
-                        <div>
-                            <div className="for" >
-                                <form >
-                                    <label htmlFor="nama_barang">Nama Barang</label>
-                                    <input type="text" name="nama_barang" placeholder="Masukkan Nama Barang" onChange={this.handleFormChange} />
+                        {/* Create data */}
 
-            	                    <label htmlFor="satuan">Satuan</label>
-                                    <input type="text" name="satuan" placeholder="Masukkan Satuan" onChange={this.handleFormChange} />
+<Card
+>
+  <Card.Body>
 
-                                    <label htmlFor="harga_beli">Harga Beli</label>
-                                    <input type="number" name="harga_beli" placeholder="Masukkan Harga Beli" onChange={this.handleFormChange} min="1" />
+    <Form onSubmit={this.handleSubmit} noValidate>
 
-                                    <label htmlFor="jumlah">Jumlah</label>
-                                    <input type="number" name="jumlah" placeholder="Masukkan Jumlah" onChange={this.handleFormChange} min="1" />
+      <Form.Group as={Row}>
+        <Form.Label column sm={2}>
+          Nama Barang
+      </Form.Label>
+        <Col sm={8}>
+          <Form.Control
+            type="text"
+  
+            value={this.state.nama_barang}
+            className=""
+            placeholder="Masukkan Nama Barang *"
+            name="nama_barang"
+            id="nama_barang"
+            noValidate
+            onChange={this.handleChange}
+          />
+          <div style={{ fontSize: 15, color: 'red' }}>
+          {this.validator.message('Nama Barang', this.state.nama_barang, 'required')}
+          </div>
+        </Col>
+      </Form.Group>
 
-                                    <label htmlFor="tgl_pembelian">Tanggal Pembelian</label>
-                                    <input type="date" name="tgl_pembelian" placeholder="Masukkan Tanggal Pembelian" onChange={this.handleFormChange} />
+      <Form.Group as={Row}>
+        <Form.Label column sm={2}>
+          satuan
+      </Form.Label>
+        <Col sm={8}>
+          <Form.Control
+            type="text"
+            value={this.state.satuan}
+            className=""
+            placeholder="Masukkan Satuan"
+            name="satuan"
+            id="satuan"
+            onChange={this.handleChange}
+            noValidate />
+          <div style={{ fontSize: 15, color: 'red' }}>
+          {this.validator.message('Satuan', this.state.satuan, 'required')}
+          </div>
+        </Col>
+      </Form.Group>
 
-                                    <label htmlFor="kd_supplier">Kode Suplier</label>
-                                    <input type="number" name="kd_supplier" placeholder="Masukkan Kode Suplier" onChange={this.handleFormChange} min="0" />
-            	                    
-                                    <label htmlFor="status">Status</label>
-                                    <input type="number" name="status" placeholder="Masukkan Status" onChange={this.handleFormChange} min="0" max="1" />
+      <Form.Group as={Row}>
+        <Form.Label column sm={2}>
+          Harga Beli
+      </Form.Label>
+        <Col sm={8}>
+          <Form.Control
+            type="number"
+            value={this.state.harga_beli}
+            className=""
+            placeholder="Masukkan Harga Beli"
+            name="harga_beli"
+            onChange={this.handleChange}
+            noValidate />
+          <div style={{ fontSize: 15, color: 'red' }}>
+          {this.validator.message('Harga Beli', this.state.harga_beli, 'required')}
+          </div>
+        </Col>
+      </Form.Group>
 
-                                    <Button variant="outline-primary" onClick={this.handleSubmit} block>Tambah</Button>{' '}
-                                </form>
-                            </div>
-                        </div>
+      <Form.Group as={Row}>
+        <Form.Label column sm={2}>
+          Jumlah
+      </Form.Label>
+        <Col sm={8}>
+          <Form.Control
+            type="number"
+            value={this.state.jumlah}
+            className=""
+            placeholder="Masukkan Jumlah"
+            name="jumlah"
+            onChange={this.handleChange}
+            noValidate />
+          <div style={{ fontSize: 15, color: 'red' }}>
+          {this.validator.message('Jumlah', this.state.jumlah, 'required')}
+          </div>
+        </Col>
+      </Form.Group>
+
+      <Form.Group as={Row}>
+        <Form.Label column sm={2}>
+          Tanggal Pembelian
+      </Form.Label>
+        <Col sm={8}>
+          <Form.Control
+            type="date"
+            value={this.state.tgl_pembelian}
+            className=""
+            placeholder="Masukkan Tanggal Pembelian"
+            name="tgl_pembelian"
+            onChange={this.handleChange}
+            noValidate />
+          <div style={{ fontSize: 15, color: 'red' }}>
+          {this.validator.message('Tanggal Pembelian', this.state.tgl_pembelian, 'required')}
+          </div>
+        </Col>
+      </Form.Group>
+
+      <Form.Group as={Row}>
+        <Form.Label column sm={2}>
+          Kode Suplier
+      </Form.Label>
+        <Col sm={8}>
+          <Form.Control
+            type="number"
+            value={this.state.kd_supplier}
+            className=""
+            placeholder="Masukka Kode Supplier"
+            name="kd_supplier"
+            onChange={this.handleChange}
+            noValidate />
+          <div style={{ fontSize: 15, color: 'red' }}>
+          {this.validator.message('Kode Supplier', this.state.kd_supplier, 'required')}
+          </div>
+        </Col>
+      </Form.Group>
+
+      <Form.Group as={Row}>
+        <Form.Label column sm={2}>Status</Form.Label>
+        <Col sm={8}>
+          <Form.Control
+            as="select"
+            value={this.state.status}
+            className=""
+            placeholder="Status"
+            name="status"
+            onChange={this.handleChange}>
+            <option>=== select ===</option>
+            <option>0</option>
+            <option>1</option>
+          </Form.Control>
+          <div style={{ fontSize: 15, color: 'red' }}>
+          {this.validator.message('Status', this.state.status, 'required')}
+          </div>
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row}>
+        <Col sm={{ span: 10, offset: 2 }}>
+          <Button type="submit" >Tambah</Button>
+        </Col>
+      </Form.Group>
+    </Form>
+  </Card.Body>
+</Card>
                     </div>
 
             </div>
