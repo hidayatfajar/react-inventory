@@ -32,7 +32,7 @@ export default class Pembelian extends Component {
   }
 
   getPostAPI = () => {
-    axios.get('http://localhost:8000/laporan/pembelian?awal=2021-01-01&akhir=2022-01-01')
+    axios.get('http://localhost:8000/laporan/pembelian?awal=2021-01-01&akhir=2086-01-01')
       .then((result) => {
         console.log(result)
         console.log(result.data.data)

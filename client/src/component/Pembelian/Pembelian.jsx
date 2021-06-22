@@ -118,9 +118,13 @@ export default class Pembelian extends Component {
     const { SearchBar } = Search;
     const columns = [
       {
+        dataField: "kd_pembelian",
+        text: "Kode Pembelian",
+        sort: true,
+      },
+      {
         dataField: "tgl_pembelian",
         text: "Tanggal Pembelian",
-        sort: true,
       },
       {
         dataField: "kd_admin",
@@ -144,13 +148,7 @@ export default class Pembelian extends Component {
                 <Row>
 
                   <Col md={-2}>
-                    <Link to={"/view/Pembelian/" + row.kd_pembelian}><Button className="mr-2" variant="success" block=""><FontAwesomeIcon icon={faEye} /></Button></Link>
-                  </Col>
-                  <Col xs={-1}>
-                    <Link to={"/update/barang/" + row.kd_barang}><Button className="mr-2" variant="warning" block=""><FontAwesomeIcon icon={faEdit} /></Button></Link>
-                  </Col>
-                  <Col xs={-1}>
-                    <Button onClick={() => this.handleRemove(row.kd_barang)} variant="danger" block=""><FontAwesomeIcon icon={faTrashAlt} /></Button>
+                    <Link to={"/view/pembelian/" + row.kd_pembelian}><Button className="mr-2" variant="success" block=""><FontAwesomeIcon icon={faEye} /></Button></Link>
                   </Col>
                 </Row>
               </Container>
@@ -201,15 +199,8 @@ export default class Pembelian extends Component {
                   <Row>
 
                     <Col xs={2}>
-                      <Link to="/add/barang"><Button className="mr-2" variant="primary" block="">Create</Button></Link>
+                      <Link to="/add/pembelian"><Button className="mr-2" variant="primary" block="">Create</Button></Link>
                     </Col>
-                    {/* <Col xs={-1}>
-                        <Button className="mr-2" variant="warning" block="">Update</Button>
-                      </Col>
-                      <Col xs={-1}>
-                        <Button variant="danger" block="">Delete</Button>
-                      </Col> */}
-
                     <Col>
                       <div className="float-right">
                         <SearchBar {...props.searchProps} />

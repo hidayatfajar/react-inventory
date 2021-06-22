@@ -69,8 +69,9 @@ ReactDOM.render(
                     <Route exact path="/update/supplier/:id" component={UpdateSupplier} />
                     
                     <Route exact path="/pembelian" component={Pembelian} />
+                    <Route exact path="/view/pembelian/:id" component={TambahPembelian} />
                     <Route exact path="/add/pembelian" component={TambahPembelian} />
-                    <Route exact path="/Laporan" component={Laporan} />
+                    <Route exact path="/laporan/pembelian" component={Laporan} />
 
                     {/* <Route path="/table" component={Table} /> */}
 

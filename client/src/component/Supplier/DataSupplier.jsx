@@ -58,12 +58,20 @@ export default class DataSupplier extends Component {
   handleRemove = (kd_supplier) => {
     axios.delete(`http://localhost:8000/hapus/supplier/${kd_supplier}`)
       .then((result) => {
+        if(result.data.success){
+          Swal.fire(
+            'success',
+            'Data berhasil dihapus.',
+            'success'
+          );
+        } else {
+          Swal.fire(
+            'error',
+            'Data tidak bisa dihapus.',
+            'error'
+          );
+        }
         this.getPostAPI();
-        if (result.success) {
-          //alert success disini
-          } else {
-          //alert gagal disini
-          }
       })
       .catch(err => {
         Swal.fire(

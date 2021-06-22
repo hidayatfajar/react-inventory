@@ -39,8 +39,8 @@ module.exports = {
 
 	delete: (req, res) => {
 		perusahaan.delete(req.con, req.params.kd_perusahaan, res, (err, rows) => {
-			if(err) return res.send(err.sqlMessage, 400)
-			res.send('success.', 200)
+			if (err) return res.json({success: false, error: true, code: 400})
+			res.json({success: true, error: false, code: 400})
 		})
 	}
 
