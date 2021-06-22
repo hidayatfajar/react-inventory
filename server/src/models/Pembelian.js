@@ -147,7 +147,7 @@ module.exports = {
 
 									} else {
 										con.rollback()
-										return res.send("kd_supplier is not found");
+										return res.json({error: true, message: "kd_supplier is not found", code: 404});
 									}
 
 								})
@@ -203,7 +203,7 @@ module.exports = {
 
 										} else {
 											con.rollback()
-											return res.send("kd_supplier is not found");
+											return res.json({error: true, message: "kd_supplier is not found", code: 404});
 										}
 
 									})

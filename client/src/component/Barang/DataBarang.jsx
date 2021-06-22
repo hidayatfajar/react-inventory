@@ -56,17 +56,25 @@ export default class TableAdmin extends Component {
   handleRemove = (kd_barang) => {
     axios.delete(`http://localhost:8000/hapus/barang/${kd_barang}`)
       .then((result) => {
-        Swal.fire(
-          'Success',
-          'Your data has been deleted!',
-          'success'
-        );
+        if(result.data.success){
+          Swal.fire(
+            'success',
+            'Data berhasil dihapus.',
+            'success'
+          );
+        } else {
+          Swal.fire(
+            'error',
+            'Data tidak bisa dihapus.',
+            'error'
+          );
+        }
         this.getPostAPI();
       })
       .catch(err => {
         Swal.fire(
           'error',
-          'cant delete the id!',
+          'Terjadi kesalahan silahkan coba beberapa saat lagi',
           'error'
         );
         console.log(err)
