@@ -54,6 +54,10 @@ render() {
           <Link to="/pembelian" >
             <h5 className="pbl"><FontAwesomeIcon icon={faShoppingBag} />{' '}Pembelian </h5>
           </Link>
+
+          <Link to="/Laporan" >
+            <h5 className="pbl"><FontAwesomeIcon icon={faShoppingBag} />{' '}Laporan </h5>
+          </Link>
         </div>
 
     </Fragment>

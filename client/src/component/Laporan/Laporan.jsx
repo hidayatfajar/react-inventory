@@ -14,7 +14,6 @@ import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
 
 // Component
 
-import './Pembelian.css'
 
 export default class Pembelian extends Component {
   constructor(props) {
@@ -33,7 +32,7 @@ export default class Pembelian extends Component {
   }
 
   getPostAPI = () => {
-    axios.get('http://localhost:8000/pembelian')
+    axios.get('http://localhost:8000/laporan/pembelian?awal=2021-01-01&akhir=2022-01-01')
       .then((result) => {
         console.log(result)
         console.log(result.data.data)
@@ -118,45 +117,25 @@ export default class Pembelian extends Component {
     const { SearchBar } = Search;
     const columns = [
       {
-        dataField: "tgl_pembelian",
-        text: "Tanggal Pembelian",
+        dataField: "kd_pembelian",
+        text: "Kode Pembelian",
         sort: true,
       },
       {
+        dataField: "tgl_pembelian",
+        text: "Tanggal Pembelian",
+      },
+      {
         dataField: "kd_admin",
-        text: "Satuan",
+        text: "Kode Admin",
       },
       {
         dataField: "kd_supplier",
-        text: "Harga Jual",
+        text: "Kode Suplier",
       },
       {
         dataField: "total_pembelian",
-        text: "Harga Beli",
-      },
-      {
-        dataField: "Link",
-        text: "Action",
-        formatter: (rowContent, row, props) => {
-          return (
-            <div>
-              <Container>
-                <Row>
-
-                  <Col md={-2}>
-                    <Link to={"/view/Pembelian/" + row.kd_pembelian}><Button className="mr-2" variant="success" block=""><FontAwesomeIcon icon={faEye} /></Button></Link>
-                  </Col>
-                  <Col xs={-1}>
-                    <Link to={"/update/barang/" + row.kd_barang}><Button className="mr-2" variant="warning" block=""><FontAwesomeIcon icon={faEdit} /></Button></Link>
-                  </Col>
-                  <Col xs={-1}>
-                    <Button onClick={() => this.handleRemove(row.kd_barang)} variant="danger" block=""><FontAwesomeIcon icon={faTrashAlt} /></Button>
-                  </Col>
-                </Row>
-              </Container>
-            </div >
-          )
-        }
+        text: "Total Pembelian",
       }
     ];
 
