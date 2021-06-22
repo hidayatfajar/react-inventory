@@ -2,20 +2,21 @@
 import React, { Component, Fragment } from 'react'
 import axios from 'axios'
 import { BrowserRouter as Router, Route, Redirect, Switch, Link } from "react-router-dom";
-import { Button, Navbar, Nav, Container, Col, Row, Form, NavDropdown } from "react-bootstrap";
+import { Button, Navbar, Nav, Container, Col, Row, Form, NavDropdown, Card } from "react-bootstrap";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import BootstrapTable from "react-bootstrap-table-next";
 import SideBar from '../Pages/SideBar'
 import ToolkitProvider, { SearchBar, Search, defaultSorted } from "react-bootstrap-table2-toolkit";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit, faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2'
+import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
+
 // Component
 
-import { faEdit, faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import './Pembelian.css'
 
-
-
-export default class DataSupplier extends Component {
+export default class Pembelian extends Component {
   constructor(props) {
     super(props)
     const token = localStorage.getItem("token")
@@ -27,12 +28,12 @@ export default class DataSupplier extends Component {
 
     this.state = {
       data: [],
-      loggedIn
+      loggedIn,
     };
   }
 
   getPostAPI = () => {
-    axios.get('http://localhost:8000/supplier?page=&limit=&search=&sort=')
+    axios.get('http://localhost:8000/pembelian')
       .then((result) => {
         console.log(result)
         console.log(result.data.data)
@@ -51,29 +52,29 @@ export default class DataSupplier extends Component {
   }
 
 
+  
   componentDidMount() {
     this.getPostAPI();
 
   }
-  handleRemove = (kd_supplier) => {
-    axios.delete(`http://localhost:8000/hapus/supplier/${kd_supplier}`)
+  handleRemove = (kd_barang) => {
+    axios.delete(`http://localhost:8000/hapus/barang/${kd_barang}`)
       .then((result) => {
+        Swal.fire(
+          'Success',
+          'Your data has been deleted!',
+          'success'
+        );
         this.getPostAPI();
-        if (result.success) {
-          //alert success disini
-          } else {
-          //alert gagal disini
-          }
       })
       .catch(err => {
         Swal.fire(
           'error',
-          'Terjadi kesalahan silahkan coba beberapa saat lagi',
+          'cant delete the id!',
           'error'
         );
         console.log(err)
       })
-
   }
   handleClick = (e) => {
     localStorage.removeItem("token");
@@ -117,18 +118,21 @@ export default class DataSupplier extends Component {
     const { SearchBar } = Search;
     const columns = [
       {
+        dataField: "tgl_pembelian",
+        text: "Tanggal Pembelian",
+        sort: true,
+      },
+      {
+        dataField: "kd_admin",
+        text: "Satuan",
+      },
+      {
         dataField: "kd_supplier",
-        text: "ID",
-        sort: true,
+        text: "Harga Jual",
       },
       {
-        dataField: "nama_supplier",
-        text: "Nama Supplier",
-        sort: true,
-      },
-      {
-        dataField: "alamat",
-        text: "Alamat",
+        dataField: "total_pembelian",
+        text: "Harga Beli",
       },
       {
         dataField: "Link",
@@ -140,13 +144,13 @@ export default class DataSupplier extends Component {
                 <Row>
 
                   <Col md={-2}>
-                    <Link to={"/view/supplier/" + row.kd_supplier}><Button className="mr-2" variant="success" block=""><FontAwesomeIcon icon={faEye} /></Button></Link>
+                    <Link to={"/view/Pembelian/" + row.kd_pembelian}><Button className="mr-2" variant="success" block=""><FontAwesomeIcon icon={faEye} /></Button></Link>
                   </Col>
-                  <Col xs={-2}>
-                    <Link to={"/update/supplier/" + row.kd_supplier}><Button className="mr-2" variant="warning" block=""><FontAwesomeIcon icon={faEdit} /></Button></Link>
+                  <Col xs={-1}>
+                    <Link to={"/update/barang/" + row.kd_barang}><Button className="mr-2" variant="warning" block=""><FontAwesomeIcon icon={faEdit} /></Button></Link>
                   </Col>
-                  <Col md={-2}>
-                    <Button onClick={() => this.handleRemove(row.kd_supplier)} variant="danger" block=""><FontAwesomeIcon icon={faTrashAlt} /></Button>
+                  <Col xs={-1}>
+                    <Button onClick={() => this.handleRemove(row.kd_barang)} variant="danger" block=""><FontAwesomeIcon icon={faTrashAlt} /></Button>
                   </Col>
                 </Row>
               </Container>
@@ -197,7 +201,7 @@ export default class DataSupplier extends Component {
                   <Row>
 
                     <Col xs={2}>
-                      <Link to="/add/supplier"><Button className="mr-2" variant="primary" block="">Create</Button></Link>
+                      <Link to="/add/barang"><Button className="mr-2" variant="primary" block="">Create</Button></Link>
                     </Col>
                     {/* <Col xs={-1}>
                         <Button className="mr-2" variant="warning" block="">Update</Button>
@@ -223,10 +227,13 @@ export default class DataSupplier extends Component {
                   columns={columns}
                   defaultSorted={defaultSorted}
                   pagination={paginationFactory(options)}
-                  headerWrapperClasses="foo" />
+                  headerWrapperClasses="foo"
+                />
               </div>
             )}
           </ToolkitProvider>
+
+          {/* <TambahPembelian/> */}
         </Container>
       </div>
     );
