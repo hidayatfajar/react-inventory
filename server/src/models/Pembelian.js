@@ -30,7 +30,7 @@ module.exports = {
     },
 
 	getDetailById: (con, id_pembelian, callback) => {
-		con.query(`SELECT * FROM d_pembelian WHERE id_pembelian = ${id_pembelian}`, callback)
+		con.query(`SELECT * FROM d_pembelian WHERE kd_pembelian = ${kd_pembelian}`, callback)
 	},
 
     getBarang: (con,callback) => {
