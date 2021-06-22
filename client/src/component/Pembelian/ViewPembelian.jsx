@@ -21,11 +21,11 @@ export default class ViewPembelian extends Component {
     }
 
     getEmployee() {
-        const kd_perusahaan = this.state.id
+        const kd_pembelian = this.state.id
         console.log(this.state.data)
-        axios.get(`http://localhost:8000/pembelian/${kd_perusahaan}`)
+        axios.get(`http://localhost:8000/pembelian/${kd_pembelian}`)
             .then(res => {
-                console.log(kd_perusahaan);
+                console.log(kd_pembelian);
                 console.log(res.data);
                 this.setState({
                     data: res.data[0]
@@ -33,12 +33,12 @@ export default class ViewPembelian extends Component {
             })
             .catch(err => {
                 Swal.fire(
-                  'The Internet?',
-                  'That thing is still around?',
-                  'question'
+                    'The Internet?',
+                    'That thing is still around?',
+                    'question'
                 );
                 console.log(err)
-              })
+            })
     }
     componentDidMount() {
         this.getEmployee();
@@ -60,7 +60,7 @@ export default class ViewPembelian extends Component {
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={this.handleClick}>
                                         Log out
-                        </NavDropdown.Item>
+                                    </NavDropdown.Item>
                                 </NavDropdown>
                             </Nav>
                         </Form>
@@ -68,7 +68,7 @@ export default class ViewPembelian extends Component {
                 </Navbar>
                 <SideBar />
                 <Card
-                    style={{ width: '41rem' }}
+                    style={{ width: '62rem' }}
                     className="bagan"
                 >
                     <Card.Body>
@@ -79,70 +79,55 @@ export default class ViewPembelian extends Component {
                         <Form onSubmit={this.handleSubmit} noValidate>
 
                             <Form.Group as={Row}>
-                                <Form.Label column sm={3}>
-                                    Kode pembelian
-                </Form.Label>
-                                <Col sm={7}>
-                                    <Form.Control value={this.state.data.kd_pembelian} />
+                                <Form.Label column sm={2}>
+                                    Kode Pembelian
+                                </Form.Label>
+                                <Col sm={8}>
+                                    <Form.Control
+                                        value={this.state.data.kd_pembelian}
+                                        />
                                 </Col>
                             </Form.Group>
-
-
                             <Form.Group as={Row}>
-                                <Form.Label column sm={3}>
-                                    Alamat
-                </Form.Label>
-                                <Col sm={7}>
-                                    <Form.Control type="text"
-
-                                        value={this.state.data.alamat}
-                                        className=""
-                                        placeholder="Alamat *"
-                                        name="alamat"
-                                        noValidate />
+                                <Form.Label column sm={2}>
+                                    Tanggal Pembelian
+                                </Form.Label>
+                                <Col sm={8}>
+                                    <Form.Control
+                                        value={this.state.data.tgl_pembelian}
+                                    />
                                 </Col>
                             </Form.Group>
-
-                            
                             <Form.Group as={Row}>
-                                <Form.Label column sm={3}>
-                                    Pemilik
-                </Form.Label>
-                                <Col sm={7}>
-                                    <Form.Control type="text"
-
-                                        value={this.state.data.pemilik}
-                                        className=""
-                                        placeholder="Nama Pemilik *"
-                                        name="pemilik"
-                                        onChange={this.handleChange}
-                                        noValidate />
+                                <Form.Label column sm={2}>
+                                    Kode Admin
+                                </Form.Label>
+                                <Col sm={8}>
+                                    <Form.Control
+                                        value={this.state.data.kd_admin}
+                                    />
                                 </Col>
                             </Form.Group>
-
-
                             <Form.Group as={Row}>
-                                <Form.Label column sm={3}>
-                                    Kota
-                </Form.Label>
-                                <Col sm={7}>
-                                    <Form.Control type="text"
-
-                                        value={this.state.data.kota}
-                                        className=""
-                                        placeholder="Nama Kota *"
-                                        name="kota"
-                                        onChange={this.handleChange}
-                                        noValidate />
+                                <Form.Label column sm={2}>
+                                    Kode Supplier
+                                </Form.Label>
+                                <Col sm={8}>
+                                    <Form.Control
+                                        value={this.state.data.kd_supplier}
+                                    />
                                 </Col>
                             </Form.Group>
-
-                            
-                            {/* <Form.Group as={Row}>
-                                <Col sm={{ span: 7, offset: 3 }}>
-                                    <Button type="submit" >Create</Button>
+                            <Form.Group as={Row}>
+                                <Form.Label column sm={2}>
+                                    Total Pembelian
+                                </Form.Label>
+                                <Col sm={8}>
+                                    <Form.Control
+                                        value={this.state.data.total_pembelian}
+                                    />
                                 </Col>
-                            </Form.Group> */}
+                            </Form.Group>
                         </Form>
                     </Card.Body>
                 </Card>

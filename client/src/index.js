@@ -35,10 +35,10 @@ import DataPerusahaan from './component/Perusahaan/DataPerusahaan';
 import UpdatePerusahaan from './component/Perusahaan/UpdatePerusahaan';
 import AddPerusahaan from './component/Perusahaan/AddPerusahaan'
 
-import Pembelian from './component/Pembelian/Pembelian'
-import TambahPembelian from './component/Pembelian/TambahPembelian' 
+import DataPembelian from './component/Pembelian/DataPembelian'
+import AddPembelian from './component/Pembelian/AddPembelian' 
 import ViewPembelian from './component/Pembelian/ViewPembelian';
-import Laporan from './component/Laporan/Laporan'
+import LaporanPenjualan from './component/Laporan/LaporanPenjualan'
           
 
 
@@ -68,10 +68,10 @@ ReactDOM.render(
                     <Route exact path="/add/supplier" component={AddSupplier} />
                     <Route exact path="/update/supplier/:id" component={UpdateSupplier} />
                     
-                    <Route exact path="/pembelian" component={Pembelian} />
-                    <Route exact path="/view/pembelian/:id" component={TambahPembelian} />
-                    <Route exact path="/add/pembelian" component={TambahPembelian} />
-                    <Route exact path="/laporan/pembelian" component={Laporan} />
+                    <Route exact path="/pembelian" component={DataPembelian} />
+                    <Route exact path="/view/pembelian/:id" component={ViewPembelian} />
+                    <Route exact path="/add/pembelian" component={AddPembelian} />
+                    <Route exact path="/laporan/penjualan" component={LaporanPenjualan} />
 
                     {/* <Route path="/table" component={Table} /> */}
 

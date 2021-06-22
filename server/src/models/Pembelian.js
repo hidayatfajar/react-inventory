@@ -137,7 +137,7 @@ module.exports = {
 
 															con.commit(e => {
 																if(e) con.rollback()
-																return res.send("SUCCESS")
+																return res.json({error: false, message: "SUCCESS", code: 200})
 															})
 														})
 													})
@@ -194,7 +194,7 @@ module.exports = {
 
 															con.commit(e => {
 																if(e) con.rollback()
-																return res.send("SUCCESS")
+																return res.json({error: false, message: "SUCCESS", code: 200})
 															})
 														})
 													})

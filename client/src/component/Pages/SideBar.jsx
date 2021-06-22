@@ -55,7 +55,7 @@ render() {
             <h5 className="pbl"><FontAwesomeIcon icon={faShoppingBag} />{' '}Pembelian </h5>
           </Link>
 
-          <Link to="/Laporan" >
+          <Link to="/laporan/penjualan" >
             <h5 className="pbl"><FontAwesomeIcon icon={faShoppingBag} />{' '}Laporan </h5>
           </Link>
         </div>
