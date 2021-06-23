@@ -13,7 +13,6 @@ module.exports = {
                 nama: req.body.nama,
                 email: req.body.email,
                 password: req.body.password,
-                gambar: req.file.path
             }
 
             con.query('SELECT email FROM admin WHERE email = ?', [post.email], (err, rows) => {

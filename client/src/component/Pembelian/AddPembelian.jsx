@@ -43,7 +43,7 @@ export default class AddPembelian extends Component {
       .then((result) => {
         console.log(result.data);
         this.setState({
-          nama_barang: '',
+          nama_barang: "",
           satuan: '',
           harga_beli: '',
           jumlah: '',
