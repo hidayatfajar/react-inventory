@@ -12,19 +12,16 @@ import Swal from 'sweetalert2'
 import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
 import SideBar from '../Pages/SideBar'
 
-export default class AddPembelian extends Component {
+export default class AddPenjualan extends Component {
   constructor(props) {
     super(props);
     this.validator = new SimpleReactValidator({ autoForceUpdate: this });
 
     this.state = {
-      nama_barang: '',
-      satuan: '',
-      harga_beli: '',
-      jumlah: '',
-      tgl_pembelian: '',
-      kd_supplier: '',
-      status: ''
+        tgl_penjualan: '',
+        kd_barang: '',
+        dibayar: '',
+        quantity: ''
     };
   }
 
@@ -38,7 +35,7 @@ export default class AddPembelian extends Component {
   handleSubmit = e => {
     e.preventDefault();
     console.log(this.state)
-    axios.post("http://localhost:8000/pembelian", this.state)
+    axios.post("http://localhost:8000/penjualan", this.state)
       .then((result) => {
         console.log(result.data);
         if(result.data.error == false){
@@ -57,13 +54,10 @@ export default class AddPembelian extends Component {
         if (this.validator.allValid()) {
           e.preventDefault();
           this.setState({
-            nama_barang: '',
-            satuan: '',
-            harga_beli: '',
-            jumlah: '',
-            tgl_pembelian: '',
-            kd_supplier: '',
-            status: ''
+            tgl_penjualan: '',
+            kd_barang: '',
+            dibayar: '',
+            quantity: ''
           })
           
           this.validator.hideMessages();
@@ -110,14 +104,17 @@ export default class AddPembelian extends Component {
             </Form>
           </Container>
         </Navbar>
+        
         <SideBar />
+
+
         <Card
           style={{ width: '50rem' }}
           className="bagan"
         >
           <Card.Body>
             <Col md={-2}>
-              <Link to={"/pembelian/"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
+              <Link to={"/penjualan/"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
             </Col><br />
             <Form onSubmit={this.handleSubmit} noValidate>
 
@@ -127,11 +124,11 @@ export default class AddPembelian extends Component {
                 </Form.Label>
                 <Col sm={8}>
                   <Form.Control
-                    type="text"
+                    type="date"
 
-                    value={this.state.nama_barang}
+                    value={this.state.tgl_penjualan}
                     className=""
-                    placeholder="Masukkan Nama Barang *"
+                    placeholder="Masukkan Tanggal Penjualan *"
                     name="nama_barang"
                     id="nama_barang"
                     noValidate
@@ -150,9 +147,9 @@ export default class AddPembelian extends Component {
                 <Col sm={8}>
                   <Form.Control
                     type="text"
-                    value={this.state.satuan}
+                    value={this.state.kd_barang}
                     className=""
-                    placeholder="Masukkan Satuan *"
+                    placeholder="Masukkan Kode Barang *"
                     name="satuan"
                     id="satuan"
                     onChange={this.handleChange}
@@ -170,9 +167,9 @@ export default class AddPembelian extends Component {
                 <Col sm={8}>
                   <Form.Control
                     type="number"
-                    value={this.state.harga_beli}
+                    value={this.state.dibayar}
                     className=""
-                    placeholder="Masukkan Harga Beli *"
+                    placeholder="Masukkan Barang yang Sudah Dibayar *"
                     name="harga_beli"
                     onChange={this.handleChange}
                     noValidate />
@@ -189,9 +186,9 @@ export default class AddPembelian extends Component {
                 <Col sm={8}>
                   <Form.Control
                     type="number"
-                    value={this.state.jumlah}
+                    value={this.state.quantity}
                     className=""
-                    placeholder="Masukkan Jumlah *"
+                    placeholder="Masukkan Quantity *"
                     name="jumlah"
                     onChange={this.handleChange}
                     noValidate />
@@ -201,63 +198,7 @@ export default class AddPembelian extends Component {
                 </Col>
               </Form.Group>
 
-              <Form.Group as={Row}>
-                <Form.Label column sm={2}>
-                  Tanggal Pembelian
-                </Form.Label>
-                <Col sm={8}>
-                  <Form.Control
-                    type="date"
-                    value={this.state.tgl_pembelian}
-                    className=""
-                    placeholder="Masukkan Tanggal Pembelian *"
-                    name="tgl_pembelian"
-                    onChange={this.handleChange}
-                    noValidate />
-                  <div style={{ fontSize: 15, color: 'red' }}>
-                    {this.validator.message('Tanggal Pembelian', this.state.tgl_pembelian, 'required')}
-                  </div>
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row}>
-                <Form.Label column sm={2}>
-                  Kode Suplier
-                </Form.Label>
-                <Col sm={8}>
-                  <Form.Control
-                    type="number"
-                    value={this.state.kd_supplier}
-                    className=""
-                    placeholder="Masukkan Kode Supplier *"
-                    name="kd_supplier"
-                    onChange={this.handleChange}
-                    noValidate />
-                  <div style={{ fontSize: 15, color: 'red' }}>
-                    {this.validator.message('Kode Supplier', this.state.kd_supplier, 'required')}
-                  </div>
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row}>
-                <Form.Label column sm={2}>Status</Form.Label>
-                <Col sm={8}>
-                  <Form.Control
-                    as="select"
-                    value={this.state.status}
-                    className=""
-                    placeholder="Status"
-                    name="status"
-                    onChange={this.handleChange}>
-                    <option>=== select ===</option>
-                    <option>0</option>
-                    <option>1</option>
-                  </Form.Control>
-                  <div style={{ fontSize: 15, color: 'red' }}>
-                    {this.validator.message('Status', this.state.status, 'required')}
-                  </div>
-                </Col>
-              </Form.Group>
+              
               <Form.Group as={Row}>
                 <Col sm={{ span: 10, offset: 2 }}>
                   <Button type="submit" >Tambah</Button>
