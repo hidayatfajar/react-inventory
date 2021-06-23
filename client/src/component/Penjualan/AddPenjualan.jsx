@@ -16,12 +16,17 @@ export default class AddPenjualan extends Component {
   constructor(props) {
     super(props);
     this.validator = new SimpleReactValidator({ autoForceUpdate: this });
-
+    const login = JSON.parse(localStorage.getItem('login'))
+    let loggedIn = true
+    if (login == null) {
+      loggedIn = false
+    }
     this.state = {
         tgl_penjualan: '',
         kd_barang: '',
         dibayar: '',
-        quantity: ''
+        quantity: '',
+        loggedIn
     };
   }
 
@@ -85,6 +90,9 @@ export default class AddPenjualan extends Component {
 
 
   render() {
+    if (this.state.loggedIn === false) {
+      return <Redirect to="/login" />;
+  }
     return (
       <div>
         {/* NavBar */}
