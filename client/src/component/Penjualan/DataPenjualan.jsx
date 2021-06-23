@@ -14,15 +14,15 @@ import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
 
 // Component
 
-import './Pembelian.css'
+import './Penjualan.css'
 
-export default class DataPembelian extends Component {
+export default class DataPenjualan extends Component {
   constructor(props) {
     super(props)
-    const login = JSON.parse(localStorage.getItem('login'))
+    const token = localStorage.getItem("token")
 
     let loggedIn = true
-    if (login == null) {
+    if (token == null) {
       loggedIn = false
     }
 
@@ -33,7 +33,7 @@ export default class DataPembelian extends Component {
   }
 
   getPostAPI = () => {
-    axios.get('http://localhost:8000/pembelian')
+    axios.get('http://localhost:8000/penjualan')
       .then((result) => {
         console.log(result)
         console.log(result.data.data)
@@ -99,25 +99,25 @@ export default class DataPembelian extends Component {
     const { SearchBar } = Search;
     const columns = [
       {
-        dataField: "kd_pembelian",
-        text: "Kode Pembelian",
+        dataField: "kd_penjualan",
+        text: "Kode Penjualan",
         sort: true,
       },
       {
-        dataField: "tgl_pembelian",
-        text: "Tanggal Pembelian",
+        dataField: "tgl_penjualan",
+        text: "Tanggal Penjualan",
       },
       {
         dataField: "kd_admin",
         text: "Kode Admin",
       },
       {
-        dataField: "kd_supplier",
-        text: "Kode Supplier",
+        dataField: "dibayar",
+        text: "Dibayar",
       },
       {
-        dataField: "total_pembelian",
-        text: "Total Pembelian",
+        dataField: "total_penjualan",
+        text: "Total Penjualan",
       },
       {
         dataField: "Link",
@@ -129,7 +129,7 @@ export default class DataPembelian extends Component {
                 <Row>
 
                   <Col md={-2}>
-                    <Link to={"/view/pembelian/" + row.kd_pembelian}><Button className="mr-2" variant="success" block=""><FontAwesomeIcon icon={faEye} /></Button></Link>
+                    <Link to={"/view/penjualan/" + row.kd_pembelian}><Button className="mr-2" variant="success" block=""><FontAwesomeIcon icon={faEye} /></Button></Link>
                   </Col>
                 </Row>
               </Container>
@@ -179,11 +179,8 @@ export default class DataPembelian extends Component {
 
                   <Row>
 
-                    <Col xs={1}>
-                      <Link to="/add/pembelian"><Button className="mr-2" variant="primary" block="">Create</Button></Link>
-                    </Col>
                     <Col xs={2}>
-                      <Link to="/detail/pembelian"><Button className="mr-2" variant="secondary" block="">Detail</Button></Link>
+                      <Link to="/add/penjualan"><Button className="mr-2" variant="primary" block="">Create</Button></Link>
                     </Col>
                     <Col>
                       <div className="float-right">

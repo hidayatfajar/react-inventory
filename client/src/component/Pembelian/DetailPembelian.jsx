@@ -14,15 +14,13 @@ import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
 
 // Component
 
-import './Pembelian.css'
-
-export default class DataPembelian extends Component {
+export default class DetailPembelian extends Component {
   constructor(props) {
     super(props)
-    const login = JSON.parse(localStorage.getItem('login'))
+    const token = localStorage.getItem("token")
 
     let loggedIn = true
-    if (login == null) {
+    if (token == null) {
       loggedIn = false
     }
 
@@ -33,7 +31,7 @@ export default class DataPembelian extends Component {
   }
 
   getPostAPI = () => {
-    axios.get('http://localhost:8000/pembelian')
+    axios.get('http://localhost:8000/detail/pembelian')
       .then((result) => {
         console.log(result)
         console.log(result.data.data)
@@ -56,6 +54,25 @@ export default class DataPembelian extends Component {
   componentDidMount() {
     this.getPostAPI();
 
+  }
+  handleRemove = (kd_barang) => {
+    axios.delete(`http://localhost:8000/hapus/barang/${kd_barang}`)
+      .then((result) => {
+        Swal.fire(
+          'Success',
+          'Your data has been deleted!',
+          'success'
+        );
+        this.getPostAPI();
+      })
+      .catch(err => {
+        Swal.fire(
+          'error',
+          'cant delete the id!',
+          'error'
+        );
+        console.log(err)
+      })
   }
   handleClick = (e) => {
     localStorage.removeItem("token");
@@ -99,44 +116,28 @@ export default class DataPembelian extends Component {
     const { SearchBar } = Search;
     const columns = [
       {
+        dataField: "id_pembelian",
+        text: "Id Pembelian",
+        sort: true,
+      },
+      {
         dataField: "kd_pembelian",
         text: "Kode Pembelian",
         sort: true,
       },
       {
-        dataField: "tgl_pembelian",
-        text: "Tanggal Pembelian",
+        dataField: "kd_barang_beli",
+        text: "kode Barang Pembelian",
       },
       {
-        dataField: "kd_admin",
-        text: "Kode Admin",
+        dataField: "jumlah",
+        text: "Jumlah",
       },
       {
-        dataField: "kd_supplier",
-        text: "Kode Supplier",
-      },
-      {
-        dataField: "total_pembelian",
-        text: "Total Pembelian",
-      },
-      {
-        dataField: "Link",
-        text: "Action",
-        formatter: (rowContent, row, props) => {
-          return (
-            <div>
-              <Container>
-                <Row>
-
-                  <Col md={-2}>
-                    <Link to={"/view/pembelian/" + row.kd_pembelian}><Button className="mr-2" variant="success" block=""><FontAwesomeIcon icon={faEye} /></Button></Link>
-                  </Col>
-                </Row>
-              </Container>
-            </div >
-          )
-        }
+        dataField: "subtotal",
+        text: "Subtotal",
       }
+      
     ];
 
     const defaultSorted = [
@@ -180,11 +181,9 @@ export default class DataPembelian extends Component {
                   <Row>
 
                     <Col xs={1}>
-                      <Link to="/add/pembelian"><Button className="mr-2" variant="primary" block="">Create</Button></Link>
-                    </Col>
-                    <Col xs={2}>
-                      <Link to="/detail/pembelian"><Button className="mr-2" variant="secondary" block="">Detail</Button></Link>
-                    </Col>
+                            <Link to={"/pembelian/"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
+                    </Col>                     
+
                     <Col>
                       <div className="float-right">
                         <SearchBar {...props.searchProps} />
@@ -207,7 +206,7 @@ export default class DataPembelian extends Component {
               </div>
             )}
           </ToolkitProvider>
-
+          
           {/* <TambahPembelian/> */}
         </Container>
       </div>

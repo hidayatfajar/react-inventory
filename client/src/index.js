@@ -4,8 +4,6 @@ import './index.css';
 import axios from 'axios'
 
 import reportWebVitals from './reportWebVitals';
-
-
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -40,9 +38,14 @@ import DataPembelian from './component/Pembelian/DataPembelian'
 import AddPembelian from './component/Pembelian/AddPembelian' 
 import ViewPembelian from './component/Pembelian/ViewPembelian';
 import LaporanPenjualan from './component/Laporan/LaporanPenjualan'
+import DetailPembelian from './component/Pembelian/DetailPembelian';
           
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
+import DataPenjualan from './component/Penjualan/DataPenjualan'
+import AddPenjualan from './component/Penjualan/AddPenjualan'
+import ViewPenjualan from './component/Penjualan/ViewPenjualan'
+import DetailPenjualan from './component/Penjualan/DetailPenjualan';
 
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
 ReactDOM.render(
   
             <BrowserRouter>
@@ -72,6 +75,12 @@ ReactDOM.render(
                     <Route exact path="/pembelian" component={DataPembelian} />
                     <Route exact path="/view/pembelian/:id" component={ViewPembelian} />
                     <Route exact path="/add/pembelian" component={AddPembelian} />
+                    <Route exact path="/detail/pembelian" component={DetailPembelian} />
+
+                    <Route exact path="/penjualan" component={DataPenjualan} />
+                    <Route exact path="/view/penjualan/:id" component={ViewPenjualan} />
+                    <Route exact path="/add/penjualan" component={AddPenjualan} />
+                    <Route exact path="/detail/penjualan" component={DetailPenjualan} />
                     <Route exact path="/laporan/penjualan" component={LaporanPenjualan} />
 
                     {/* <Route path="/table" component={Table} /> */}
