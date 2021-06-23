@@ -17,10 +17,9 @@ import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
 export default class DetailPenjualan extends Component {
   constructor(props) {
     super(props)
-    const token = localStorage.getItem("token")
-
+    const login = JSON.parse(localStorage.getItem('login'))
     let loggedIn = true
-    if (token == null) {
+    if (login == null) {
       loggedIn = false
     }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import SimpleReactValidator from 'simple-react-validator';
-import { Link } from 'react-router-dom'
+import {Redirect, Link } from 'react-router-dom'
 import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Form, Button, Container, Row, Col, NavDropdown, Navbar, Nav, Card } from 'react-bootstrap';
@@ -13,7 +13,11 @@ export default class UpdateBarang extends Component {
     constructor(props) {
         super(props);
         this.validator = new SimpleReactValidator({ autoForceUpdate: this });
-
+        const login = JSON.parse(localStorage.getItem('login'))
+        let loggedIn = true
+        if (login == null) {
+            loggedIn = false
+        }
         this.state = {
 
             id: this.props.match.params.id,
@@ -23,7 +27,8 @@ export default class UpdateBarang extends Component {
             harga_beli: "",
             stok: "",
             status: null,
-            data: {}
+            data: {},
+            loggedIn
 
         }
     }
@@ -113,7 +118,9 @@ export default class UpdateBarang extends Component {
 
     render() {
         const data = this.state;
-
+        if (this.state.loggedIn === false) {
+            return <Redirect to="/login" />;
+        }
         return (
             <div>
                 {/* NavBar */}

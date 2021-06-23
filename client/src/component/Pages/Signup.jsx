@@ -6,18 +6,24 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Button, Card, Form, Navbar, Nav, Container, Col } from 'react-bootstrap'
 import Swal from 'sweetalert2'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import {Redirect, Link } from 'react-router-dom'
 
 
 export default class Signup extends Component {
 
     constructor(props){
         super(props)
+        const login = JSON.parse(localStorage.getItem('login'))
+    let loggedIn = true
+    if (login == null) {
+      loggedIn = false
+    }
         this.validator = new SimpleReactValidator;
         this.state = {
           nama: "",
           email: "",
-          password: ""
+          password: "",
+          loggedIn
       }
 
     };
@@ -54,7 +60,7 @@ export default class Signup extends Component {
   }
 
   render() {
-
+   
     return (
 
       ['Light'].map((variant, idx) => (
