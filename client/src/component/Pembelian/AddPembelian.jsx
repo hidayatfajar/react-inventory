@@ -38,10 +38,23 @@ export default class TambahPembelian extends Component {
   handleSubmit = e => {
     e.preventDefault();
     console.log(this.state)
+    if (this.validator.allValid()) {
     axios.post("http://localhost:8000/pembelian", this.state)
       .then((result) => {
         console.log(result.data);
-        if(result.data.error == false){
+        this.setState({
+          nama_barang: '',
+          satuan: '',
+          harga_beli: '',
+          jumlah: '',
+          tgl_pembelian: '',
+          kd_supplier: '',
+          status: ''
+        })
+        this.validator.hideMessages();
+          // this.props.onSubmit(this.state);
+          console.log(this.state);
+        if (result.data.error == false) {
           Swal.fire(
             'success',
             'Data berhasil ditambahkan.',
@@ -53,40 +66,25 @@ export default class TambahPembelian extends Component {
             'Kode Supplier tidak ditemukan.',
             'error'
           );
-        }
-        if (this.validator.allValid()) {
-          e.preventDefault();
-          this.setState({
-            nama_barang: '',
-            satuan: '',
-            harga_beli: '',
-            jumlah: '',
-            tgl_pembelian: '',
-            kd_supplier: '',
-            status: ''
-          })
-          
-          this.validator.hideMessages();
-          // this.props.onSubmit(this.state);
-          console.log(this.state);
-        } else {
-          this.validator.showMessages();
-          // rerender to show messages for the first time
-          // you can use the autoForceUpdate option to do this automatically`
-          this.forceUpdate();
-        }
+        } 
         // this.props.history.push("/admin")
         console.log(result.data)
         console.log(this.state)
       })
       .catch(err => {
-         Swal.fire(
+        Swal.fire(
           'error',
           'Terjadi kesalahan silahkan coba beberapa saat lagi',
           'error'
         );
         console.log(err)
       })
+    } else {
+      this.validator.showMessages();
+      // rerender to show messages for the first time
+      // you can use the autoForceUpdate option to do this automatically`
+      this.forceUpdate();
+    }
   };
 
 
