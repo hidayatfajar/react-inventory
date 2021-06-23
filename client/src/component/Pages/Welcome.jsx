@@ -8,11 +8,10 @@ export default class Welcome extends Component {
     
     constructor(props){
         super(props)
-        const token = localStorage.getItem("token")
-
-        let loggedIn = true
-        if(token == null){
-            loggedIn = false
+        const login = JSON.parse(localStorage.getItem('login'))
+    let loggedIn = true
+    if (login == null) {
+      loggedIn = false
     }
     this.state = {
         loggedIn
@@ -20,6 +19,7 @@ export default class Welcome extends Component {
     }
 
     render() {
+      
         return (
           <div className="home">
             <div className="Nav">

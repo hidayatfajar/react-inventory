@@ -19,7 +19,6 @@ export default class DataPerusahaan extends Component {
   constructor(props) {
     super(props)
     const login = JSON.parse(localStorage.getItem('login'))
-
     let loggedIn = true
     if (login == null) {
       loggedIn = false

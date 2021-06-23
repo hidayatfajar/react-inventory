@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import SimpleReactValidator from 'simple-react-validator';
 import { Form, Button, Container, Row, Col, NavDropdown, Navbar, Nav, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Link } from 'react-router-dom'
+import {Redirect, Link } from 'react-router-dom'
 import axios from 'axios'
 import SideBar from '../Pages/SideBar'
 import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
@@ -14,10 +14,15 @@ class Create extends Component {
   constructor(props) {
     super(props);
     this.validator = new SimpleReactValidator({ autoForceUpdate: this });
-
+    const login = JSON.parse(localStorage.getItem('login'))
+    let loggedIn = true
+    if (login == null) {
+      loggedIn = false
+    }
     this.state = {
       nama_supplier: "",
       alamat: "",
+      loggedIn
     }
   }
 
@@ -66,7 +71,9 @@ class Create extends Component {
   };
 
   render() {
-
+    if (this.state.loggedIn === false) {
+      return <Redirect to="/login" />;
+  }
     return (
       <div>
         {/* NavBar */}
