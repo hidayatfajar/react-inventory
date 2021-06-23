@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import axios from 'axios'
 
 import reportWebVitals from './reportWebVitals';
 
@@ -40,7 +41,7 @@ import AddPembelian from './component/Pembelian/AddPembelian'
 import ViewPembelian from './component/Pembelian/ViewPembelian';
 import LaporanPenjualan from './component/Laporan/LaporanPenjualan'
           
-
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
 
 ReactDOM.render(
   

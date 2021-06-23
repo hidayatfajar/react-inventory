@@ -2,32 +2,58 @@ import React, { Component } from 'react'
 import { Button, Navbar, Nav, Jumbotron, Container, NavDropdown, FormControl, Form } from 'react-bootstrap'
 import { Redirect, Link } from 'react-router-dom'
 import SideBar from "./SideBar";
+import axios from 'axios'
 
 
 class Homepage extends Component {
     constructor(props) {
         super(props)
-        const token = localStorage.getItem("token")
-
-        let loggedIn = true
-        if (token == null) {
-            loggedIn = false
+        const login = JSON.parse(localStorage.getItem('login'))
+        console.log(login)
+        // const token = login.token
+        // console.log(token)
+    
+        let loggedIn = true;
+        if (login == null) {
+          loggedIn = false;
         }
-
         this.state = {
-            loggedIn
+            loggedIn,
+            state : {}
         }
+        console.log(this.state.state.admin)
     }
+    
+    state = {};
+    getAdmin = () => {
+      const login = JSON.parse(localStorage.getItem('login'))
+      const axiosConfig = {
+          "headers": {
+              "Authorization": "Bearer " + login.token
+          }
+      }
+      axios.get('admin/' + login.kd_admin, axiosConfig)
+          .then(res => {
+              console.log(res.data.token)
+              this.setState({
+                  admin: res.data.data[0]
+              })
+          })
+          .catch(err => {
+              console.log(err)
+          })
+  }
 
     handleClick = e => {
-        localStorage.removeItem("token")
+        localStorage.removeItem("login")
         this.props.history.push("/login")
     }
 
     render() {
-        if (this.state.loggedIn === false) {
-            return <Redirect to="/login" />
-        }
+      const data = JSON.parse(localStorage.getItem('login'))
+      if (this.state.loggedIn === false) {
+          return <Redirect to="/login" />;
+      }
         return (
             <div>
                {/* NavBar */}
@@ -52,7 +78,7 @@ class Homepage extends Component {
 
                     <Jumbotron>
                         <Container>
-                            <h1>Welcome</h1>
+                            <h1>Welcome, {data.nama}</h1>
                             <p className="a">
                             Welcome to react bootstrap homepage, this is where you started
                             </p>

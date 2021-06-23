@@ -18,21 +18,37 @@ import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
 export default class Pembelian extends Component {
   constructor(props) {
     super(props)
-    const token = localStorage.getItem("token")
+    const login = JSON.parse(localStorage.getItem('login'))
 
     let loggedIn = true
-    if (token == null) {
+    if (login == null) {
       loggedIn = false
     }
 
     this.state = {
       data: [],
       loggedIn,
+      awal : "",
+      akhir : ""
     };
   }
 
+  handleSearch = e => {
+      console.warn(this.state.awal)
+      console.warn(this.state.akhir)
+      console.log(`http://localhost:8000/laporan/penjualan?awal${this.state.awal}&akhir${this.state.akhir}`)
+  }
+
+  handleChange = e => {
+    e.preventDefault();
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    console.log(this.state.awal)
+  }
+
   getPostAPI = () => {
-    axios.get('http://localhost:8000/laporan/penjualan?awal=2000-01-01&akhir=2086-01-01')
+    axios.get(`http://localhost:8000/laporan/penjualan?awal${this.state.awal}&akhir${this.state.akhir}`)
       .then((result) => {
         console.log(result)
         console.log(result.data.data)
@@ -48,7 +64,7 @@ export default class Pembelian extends Component {
         );
         console.log(err)
       })
-  } 
+  }
   componentDidMount() {
     this.getPostAPI();
   }
@@ -159,12 +175,27 @@ export default class Pembelian extends Component {
                     <Col xs={2}>
                       <Link to="/add/barang"><Button className="mr-2" variant="primary" block="">Create</Button></Link>
                     </Col>
-                    {/* <Col xs={-1}>
-                        <Button className="mr-2" variant="warning" block="">Update</Button>
-                      </Col>
-                      <Col xs={-1}>
-                        <Button variant="danger" block="">Delete</Button>
-                      </Col> */}
+                    <Col xs={4}>
+                      <Form >
+                        <Form.Group as={Row}>
+                          <Col sm={8}>
+                            <Form.Control type="date" name='awal' id='awal' value={this.state.awal} onChange={this.handleChange}/>
+                          </Col>
+                        </Form.Group>
+                      </Form>
+                    </Col>
+                    <Col xs={4}>
+                      <Form >
+                        <Form.Group as={Row}>
+                          <Col sm={8}>
+                            <Form.Control type="date" name='akhir' id='akhir' value={this.state.akhir} onChange={this.handleChange}/>
+                          </Col>
+                        </Form.Group>
+                      </Form>
+                    </Col>
+                    <Col>
+                    <Button onClick={this.handleSearch}></Button>
+                    </Col>
 
                     <Col>
                       <div className="float-right">
