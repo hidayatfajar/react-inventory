@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import axios from 'axios'
 
 import reportWebVitals from './reportWebVitals';
-
-
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -46,6 +45,7 @@ import AddPenjualan from './component/Penjualan/AddPenjualan'
 import ViewPenjualan from './component/Penjualan/ViewPenjualan'
 import DetailPenjualan from './component/Penjualan/DetailPenjualan';
 
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
 ReactDOM.render(
   
             <BrowserRouter>

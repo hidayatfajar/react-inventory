@@ -19,10 +19,10 @@ import './Pembelian.css'
 export default class DataPembelian extends Component {
   constructor(props) {
     super(props)
-    const token = localStorage.getItem("token")
+    const login = JSON.parse(localStorage.getItem('login'))
 
     let loggedIn = true
-    if (token == null) {
+    if (login == null) {
       loggedIn = false
     }
 
