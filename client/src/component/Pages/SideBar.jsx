@@ -13,10 +13,11 @@ export default class SideBar extends Component {
   handleClick = e => {
     localStorage.removeItem("token")
     this.props.history.push("/")
-  }
-  render() {
-    return (
-      <Fragment>
+}
+render() {
+  const data = JSON.parse(localStorage.getItem('login'))
+  return (
+    <Fragment>
 
 
         {/* SideBar */}
@@ -27,8 +28,11 @@ export default class SideBar extends Component {
               <FontAwesomeIcon icon={faUserCircle} />
             </i>
             {/* <p>{this.state.title}</p> */}
-          </center>
           <br />
+          <div style={{ color : 'whitesmoke' }}>
+            <h5>{data.nama}</h5>
+          </div>
+          </center>
           <hr />
 
           <Link to="/home" >

@@ -1,143 +1,192 @@
 import React, { Component } from 'react'
-import { Button, Navbar, Nav, Jumbotron, Container, Card, Form } from 'react-bootstrap'
-import SimpleReactValidator from 'simple-react-validator';
-import { Redirect, Link } from "react-router-dom";
-import '../Assets/Login.css';
+import { Typography, TextField, Grid, Link, Paper } from '@material-ui/core'
+import axios from 'axios'
+import { Redirect} from 'react-router-dom'
+import { Button, Navbar, Nav, Jumbotron, Container, NavDropdown, FormControl, Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import SimpleReactValidator from 'simple-react-validator';
 
-export default class Login extends Component {
+class Login extends Component {
+    constructor(props) {
+        super(props)
+        const login = JSON.parse(localStorage.getItem('login'))
+        this.validator = new SimpleReactValidator()
 
-  constructor(props) {
-    super(props)
-    const token = localStorage.getItem("token")
-
-    let loggedIn = true
-    if (token == null) {
-      loggedIn = false
-      this.validator = new SimpleReactValidator;
+        let loggedIn = true;
+        if (login == null) {
+          loggedIn = false
+        }
+        this.state = {
+            email: "",
+            password: "",
+            login: false,
+            dataError: "",
+            errorMessage: "Email atau password salah",
+            loggedIn
+        }
     }
-    this.state = {
-      email: '',
-      password: '',
-      loggedIn
+
+    handleChange = e => {
+        e.preventDefault();
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
-  }
-  handleClick = e => {
-    this.props.history.push("/signup")
-  }
-  onChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-    e.preventDefault();
-  }
-  handleSubmit = e => {
 
-    if (this.validator.allValid()) {
-      e.preventDefault();
-      this.validator.hideMessages();
-      console.log(this.state);
-    } else {
-      this.validator.showMessages();
-      // rerender to show messages for the first time
-      // you can use the autoForceUpdate option to do this automatically`
-      this.forceUpdate();
+    handleClick = e => {
+        this.props.history.push("/signup")
     }
-    const { email, password } = this.state
-    if (email === "fajarnh67@gmail.com" && password === "asd") {
-      localStorage.setItem("token", "aasdhjgaidfgaiofgqe")
-      this.setState({
-        loggedIn: true
-      })
+
+    login = e => {
+        e.preventDefault();
+        const data = {
+            email: this.state.email,
+            password: this.state.password
+        }
+        if (this.validator.allValid()) {
+            axios.post('http://localhost:8000/login', data)
+                .then((response) => {
+                    this.setState({ dataError: response.data.error })
+                    if (this.state.dataError) {
+                        console.log(this.state.dataError)
+                    } else {
+                        console.log(response.data)
+                        localStorage.setItem('login', JSON.stringify({
+                            login: true,
+                            token: response.data.token,
+                            kd_admin: response.data.kd_admin,
+                            nama: response.data.nama,
+                            gambar: response.data.gambar,
+                            email: response.data.email
+                        }))
+                        this.props.history.push("/home")
+                    }
+                })
+        } else {
+            this.validator.showMessages();
+            // rerender to show messages for the first time
+            // you can use the autoForceUpdate option to do this automatically`
+            this.forceUpdate();
+        }
     }
-    e.preventDefault();
+    render() {
+        if (this.state.loggedIn === false) {
+            return <Redirect to="/login" />;
+        }
+        return (
+            [
+                'Light'
+            ].map((variant, idx) => (
 
-  }
-  render() {
-    if (this.state.loggedIn) {
-      return <Redirect to="/home" />
+                <div className="login">
+
+                    <div className="Nav">
+                        <Navbar bg="dark" variant="dark" expands="md">
+                            <Navbar.Brand>Ourflow</Navbar.Brand>
+                            <Nav className="mr-auto">
+                                <Nav.Link>
+                                    <Link to="/">
+                                        Home
+                                    </Link>
+                                </Nav.Link>
+                            </Nav>
+                            <Nav>
+                                <Button variant="secondary" block onClick={this.handleClick}>
+                                    Sign Up
+                                </Button>
+                            </Nav>
+                        </Navbar>
+                    </div>
+                    <div>
+                        <center style={{
+                            height: "90vh",
+                            display: "flex",
+                        }}>
+                            <Grid container component="main" style={{
+                                width: '70vw',
+                                margin: "auto",
+                                justifyContent: "center",
+                            }}>
+                                {/* <Grid item xs={false} sm={4} md={7} style={{
+                    backgroundImage: 'url(https://source.unsplash.com/random)',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                }} /> */}
+                                <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square >
+                                    <div className="paper" style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'center',
+                                        padding: 30
+                                    }}>
+                                        <Typography component="h1" variant="h5">
+                                            Log In
+                                        </Typography>
+                                        <form noValidate onSubmit={this.login} style={{ width: '100%' }}>
+                                            <div>
+                                                <TextField
+                                                    variant="outlined"
+                                                    margin="normal"
+                                                    required
+                                                    fullWidth
+                                                    id="email"
+                                                    label="Email"
+                                                    name="email"
+                                                    autoComplete="email"
+                                                    autoFocus
+                                                    value={this.state.email}
+                                                    onChange={this.handleChange}
+                                                    noValidate
+                                                />
+                                                {this.state.dataError ? <div style={{ color: 'red' }}>{this.state.errorMessage}</div> : null}
+                                                {this.validator.message('email', this.state.email, `required|email`, { className: 'text-danger' })}
+                                            </div>
+                                            <div>
+                                                <TextField
+                                                    variant="outlined"
+                                                    margin="normal"
+                                                    required
+                                                    fullWidth
+                                                    id="password"
+                                                    label="Password"
+                                                    name="password"
+                                                    type="password"
+                                                    autoComplete="password"
+                                                    autoFocus
+                                                    value={this.state.password}
+                                                    onChange={this.handleChange}
+                                                    noValidate
+                                                />
+                                                {this.state.dataError
+                                                    ? <div style={{ color: 'red' }}>{this.state.errorMessage}</div>
+                                                    : null}
+                                                {this.validator.message('password', this.state.password, `required|min:4`, { className: 'text-danger' })}
+                                            </div>
+                                            <Button
+                                                type="submit"
+                                                fullWidth
+                                                variant="dark"
+                                                color="primary"
+                                                block
+                                            >Log In</Button>
+                                            <Grid container>
+                                                <Grid item>
+                                                    <Link href="/regist" variant="body2">
+                                                        Don't have an account? Sign Up
+                                                    </Link>
+                                                </Grid>
+                                            </Grid>
+                                        </form>
+                                    </div>
+                                </Grid>
+                            </Grid>
+                        </center>
+                    </div>
+                </div>
+            ))
+        );
     }
-    return (
-      [
-        'Light'
-      ].map((variant, idx) => (
-
-        <div className="login">
-
-          <div className="Nav">
-            <Navbar bg="dark" variant="dark" expands="md">
-              <Navbar.Brand>Ourflow</Navbar.Brand>
-              <Nav className="mr-auto">
-                <Nav.Link>
-                  <Link to="/">
-                    Home
-                          </Link>
-                </Nav.Link>
-              </Nav>
-              <Nav>
-                <Button variant="secondary" block onClick={this.handleClick}>
-                  Sign Up
-                        </Button>
-              </Nav>
-            </Navbar>
-          </div>
-          <div className="wrapper-login">
-            <Container>
-              <Card
-                style={{ width: '28rem', borderRadius: 15 }}
-                className="login-form"
-                bg={variant.toLowerCase()}
-                key={idx}
-                text={variant.toLowerCase() === 'light' ? 'dark' : 'white'}
-              >
-                <Card.Title>
-                  <div className="text-center">
-                    <h3>Login</h3>
-                  </div>
-                </Card.Title>
-                <Card.Body>
-
-                  <Form onSubmit={this.handleSubmit} noValidate>
-
-                    <Form.Group controlId="formGroupemail">
-                      <div className="email">
-                        <Form.Label htmlFor="email">Email</Form.Label>
-                        <Form.Control type="email"
-                          style={{ borderRadius: 15 }}
-                          className=""
-                          placeholder="Email *"
-                          name="email"
-                          value={this.state.email} onChange={this.onChange} noValidate />
-                        <div style={{ fontSize: 15, color: 'red' }}>
-                          {this.validator.message('Email', this.state.email, 'required|email')}
-                        </div>
-                      </div>
-                    </Form.Group>
-
-                    <Form.Group controlId="formGrouppassword">
-                      <div className="password">
-                        <Form.Label htmlFor="password">Password</Form.Label>
-                        <Form.Control type="password"
-                          style={{ borderRadius: 15 }}
-                          className=""
-                          placeholder="Password *"
-                          name="password"
-                          value={this.state.password} onChange={this.onChange} noValidate />
-                        <div style={{ fontSize: 15, color: 'red' }}>
-                          {this.validator.message('Password', this.state.password, 'required|alpha')}
-                        </div>
-                      </div>
-                    </Form.Group>
-                    <Button type="submit" variant="dark" block style={{ borderRadius: 15 }} >
-                      Login
-                          </Button>
-                  </Form>
-                </Card.Body>
-              </Card >
-            </Container>
-          </div>
-        </div>
-      ))
-    );
-  }
 }
+
+export default Login
