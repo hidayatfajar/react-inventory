@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarFooter, SidebarContent } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
-import { Container, Button, Navbar, Nav, Form, FormControl, NavDropdown } from 'react-bootstrap'
+import { Container, Button, Navbar, Nav, Card, FormControl, NavDropdown, Dropdown } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle, faUser, faChartLine, faStoreAlt, faCopy, faShoppingBag, faArchive, faClipboardList, faBuilding } from '@fortawesome/free-solid-svg-icons'
@@ -13,13 +13,13 @@ export default class SideBar extends Component {
   handleClick = e => {
     localStorage.removeItem("token")
     this.props.history.push("/")
-}
-render() {
-  return (
-    <Fragment>
-     
+  }
+  render() {
+    return (
+      <Fragment>
 
-      {/* SideBar */}
+
+        {/* SideBar */}
 
         <div class="sidenav">
           <center>
@@ -44,23 +44,49 @@ render() {
           </Link>
 
           <Link to="/perusahaan" >
-            <h5 className="spl"> <FontAwesomeIcon icon={faBuilding} />{' '} <span className="space"> Data Perusahaan </span> </h5>
+            <h5 className="dpr"> <FontAwesomeIcon icon={faBuilding} />{' '} <span className="space"> Data Perusahaan </span> </h5>
           </Link>
 
-          <Link to="#penjual" >
-            <h5 className="pjl"><FontAwesomeIcon icon={faStoreAlt} />{' '}Penjualan  </h5>
-          </Link>
+          <div class="dropdown" defaultActiveKey="0">
+            <div class="dropbtn"> <h5 className="pjl"><FontAwesomeIcon icon={faStoreAlt} />{' '}Penjualan  </h5></div>
 
-          <Link to="/pembelian" >
-            <h5 className="pbl"><FontAwesomeIcon icon={faShoppingBag} />{' '}Pembelian </h5>
-          </Link>
+            <div class="dropdown-content" eventKey="0">
 
-          <Link to="/laporan/penjualan" >
-            <h5 className="pbl"><FontAwesomeIcon icon={faShoppingBag} />{' '}Laporan </h5>
-          </Link>
+              <a><Link to="/penjualan" >
+                <b>Data Penjualan</b>
+              </Link>
+              </a>
+
+              <a><Link to="/laporan/penjualan" >
+                <b>Laporan Penjualan</b>
+              </Link>
+              </a>
+
+            </div>
+          </div>
+
+          <div class="dropdown" defaultActiveKey="1">
+            <div class="dropbtn"> <h5 className="pbl"><FontAwesomeIcon icon={faShoppingBag} />{' '}Pembelian </h5></div>
+
+            <div class="dropdown-content" eventKey="1">
+
+              <a><Link to="/pembelian" >
+                <b>Data Pembelian</b>
+              </Link>
+              </a>
+
+              <a><Link to="/laporan/pembelian" >
+                <b>Laporan Pembelian</b>
+              </Link>
+              </a>
+
+            </div>
+          </div>
+
+
         </div>
 
-    </Fragment>
+      </Fragment>
     )
   }
 }

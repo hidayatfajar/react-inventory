@@ -1,76 +1,131 @@
 i{
-    color: white;
-  }
-  
-  p{
   color: white;
-  font-size: 25px;
+}
+
+p{
+color: white;
+font-size: 25px;
+}
+
+hr{
+color: white;
+}
+
+.sidenav {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: black;
+  overflow-x: hidden;
+  padding-top: 90px;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 50px;    
+  color: grey;
+  display: block;
+  padding-top: 25px;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 180px; /* Same as the width of the sidenav */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+.acc {
+  color: none;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.dash{
+word-spacing: 20px;
+}
+
+.brg{
+word-spacing: 20px;
+}
+
+.spl{
+word-spacing: 25px;
+}
+
+.dpr{
+  word-spacing: 23px;
   }
-  
-  hr{
+
+.pjl{
+word-spacing: 20px;
+}
+
+.pbl{
+word-spacing: 24px;
+}
+
+.lprn{
+word-spacing: 24px;
+}
+
+.space{
+word-spacing: 0px;
+}
+
+.dropbtn {
+  background-color: none;
+  color: gray;
+  width: 240px;
+  cursor: pointer;
+  padding-top: 25px;
+  padding-left: 12px;
+}
+.dropbtn :hover{
   color: white;
-  }
-  
-  .sidenav {
-    height: 100%;
-    width: 240px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: black;
-    overflow-x: hidden;
-    padding-top: 90px;
-  }
-  
-  .sidenav a {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 50px;    
-    color: grey;
-    display: block;
-    padding-top: 25px;
-  }
-  
-  .sidenav a:hover {
-    color: #f1f1f1;
-  }
-  
-  .main {
-    margin-left: 180px; /* Same as the width of the sidenav */
-    font-size: 28px; /* Increased text to enable scrolling */
-    padding: 0px 10px;
-  }
-  
-  @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-  }
-  
-  .dash{
-  word-spacing: 20px;
-  }
-  
-  .brg{
-  word-spacing: 20px;
-  }
-  
-  .spl{
-  word-spacing: 25px;
-  }
-  
-  .pjl{
-  word-spacing: 15px;
-  }
-  
-  .pbl{
-  word-spacing: 22px;
-  }
-  
-  .lprn{
-  word-spacing: 22px;
-  }
-  
-  .space{
-  word-spacing: 0px;
-  }
+}
+
+.dropbtn a:hover {
+  color: #f1f1f1;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  width: 250px;
+  background-color: gray;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 5px 6px;
+  font-size: 20px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: gray
+
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
