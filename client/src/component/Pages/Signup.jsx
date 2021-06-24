@@ -86,15 +86,15 @@ export default class Signup extends Component {
           </div>
 
           <center style={{
-                height: "100vh",
+                height: "90vh",
                 display: "flex",
             }}>
             <Grid container component="main" style={{
-                width: '80vw',
+                width: '70vw',
                 margin : "auto",
                 justifyContent : "center",
             }}>
-                <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square >
+                <Grid item xs={10} sm={8} md={5} component={Paper} elevation={6} square >
                     <div className="paper" style={{
                         // margin: 30,
                         display: 'flex',

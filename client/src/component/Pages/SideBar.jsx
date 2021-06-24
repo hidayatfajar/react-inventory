@@ -4,7 +4,7 @@ import 'react-pro-sidebar/dist/css/styles.css';
 import { Container, Button, Navbar, Nav, Card, FormControl, NavDropdown, Dropdown } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserCircle, faUser, faChartLine, faStoreAlt, faCopy, faShoppingBag, faArchive, faClipboardList, faBuilding } from '@fortawesome/free-solid-svg-icons'
+import { faUserCircle, faUser, faChartLine, faStoreAlt, faCopy, faShoppingBag, faArchive, faClipboardList, faBuilding, faCode } from '@fortawesome/free-solid-svg-icons'
 import '../Assets/SideBar.css'
 
 export default class SideBar extends Component {
@@ -24,8 +24,8 @@ render() {
 
         <div class="sidenav">
           <center>
-            <i class="fal fa-3x">
-              <FontAwesomeIcon icon={faUserCircle} />
+            <i class="fal fa-4x">
+              <FontAwesomeIcon icon={faCode} />
             </i>
             {/* <p>{this.state.title}</p> */}
           <br />

@@ -26,6 +26,7 @@ export default class ViewPenjualan extends Component {
     getPostAPI = () => {
         const kd_penjualan = this.state.id
         axios.get(`http://localhost:8000/penjualan/${kd_penjualan}`)
+
           .then((result) => {
             console.log(result)
             console.log(result.data.data)
@@ -49,6 +50,7 @@ export default class ViewPenjualan extends Component {
         this.getPostAPI();
     
       }
+
 
 
     render() {
@@ -83,9 +85,9 @@ export default class ViewPenjualan extends Component {
                     <Card.Body>
 
                         <Col md={-2}>
-                            <Link to={"/penjualan/"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
+                            <Link to={"/penjualan"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
                         </Col><br />
-                        <Form onSubmit={this.handleSubmit} noValidate>
+                        <Form>
 
                             <Form.Group as={Row}>
                                 <Form.Label column sm={2}>
