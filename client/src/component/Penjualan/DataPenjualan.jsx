@@ -128,7 +128,7 @@ export default class DataPenjualan extends Component {
                 <Row>
 
                   <Col md={-2}>
-                    <Link to={"/view/penjualan/" + row.kd_pembelian}><Button className="mr-2" variant="success" block=""><FontAwesomeIcon icon={faEye} /></Button></Link>
+                    <Link to={"/view/penjualan/" + row.kd_penjualan}><Button className="mr-2" variant="success" block=""><FontAwesomeIcon icon={faEye} /></Button></Link>
                   </Col>
                 </Row>
               </Container>
@@ -153,7 +153,7 @@ export default class DataPenjualan extends Component {
             <Navbar.Brand href="#home">Navbar</Navbar.Brand>
             <Form inline>
               <Nav>
-                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                <NavDropdown title="Akun" id="basic-nav-dropdown">
                   <NavDropdown.Item href="#">Profile</NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item onClick={this.handleClick}>
@@ -164,7 +164,9 @@ export default class DataPenjualan extends Component {
             </Form>
           </Container>
         </Navbar>
+
         <SideBar />
+
         <Container>
 
           <ToolkitProvider
@@ -178,8 +180,11 @@ export default class DataPenjualan extends Component {
 
                   <Row>
 
-                    <Col xs={2}>
+                    <Col xs={1}>
                       <Link to="/add/penjualan"><Button className="mr-2" variant="primary" block="">Create</Button></Link>
+                    </Col>
+                    <Col xs={2}>
+                      <Link to="/detail/penjualan"><Button className="mr-2" variant="secondary" block="">Detail</Button></Link>
                     </Col>
                     <Col>
                       <div className="float-right">

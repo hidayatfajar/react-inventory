@@ -14,8 +14,8 @@ module.exports = {
 
     },
 
-    getById: (con, id_penjualan, callback) => {
-        const query = `SELECT * FROM t_penjualan WHERE id_penjualan = '${id_penjualan}'`
+    getById: (con, kd_penjualan, callback) => {
+        const query = `SELECT * FROM penjualan WHERE kd_penjualan = '${kd_penjualan}'`
 		con.query(query, callback)
     },
 
