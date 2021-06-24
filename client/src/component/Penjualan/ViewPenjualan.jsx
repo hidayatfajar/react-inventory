@@ -7,7 +7,7 @@ import { Form, Button, Container, Row, Col, NavDropdown, Navbar, Nav, Card } fro
 import SideBar from '../Pages/SideBar'
 import Swal from 'sweetalert2'
 
-export default class ViewPenjualan extends Component {
+export default class ViewPembelian extends Component {
 
     constructor(props) {
         super(props);
@@ -16,42 +16,38 @@ export default class ViewPenjualan extends Component {
     if (login == null) {
       loggedIn = false
     }
+        this.state = {
 
-    this.state = {
-        id: this.props.match.params.id,
-        data: [],
-        loggedIn,
-      };
+            id: this.props.match.params.id,
+            data: {},
+            loggedIn
+
+        }
     }
-    getPostAPI = () => {
-        const kd_penjualan = this.state.id
-        axios.get(`http://localhost:8000/penjualan/${kd_penjualan}`)
 
-          .then((result) => {
-            console.log(result)
-            console.log(result.data.data)
-            this.setState({
-              data: result.data.data[0]
-            });
-          })
-          .catch(err => {
-            Swal.fire(
-              'The Internet?',
-              'That thing is still around?',
-              'question'
-            );
-            console.log(err)
-          })
-      }
-    
-    
-      
-      componentDidMount() {
-        this.getPostAPI();
-    
-      }
-
-
+    getEmployee() {
+        const kd_pembelian = this.state.id
+        console.log(this.state.data)
+        axios.get(`http://localhost:8000/pembelian/${kd_pembelian}`)
+            .then(res => {
+                console.log(kd_pembelian);
+                console.log(res.data);
+                this.setState({
+                    data: res.data[0]
+                });
+            })
+            .catch(err => {
+                Swal.fire(
+                    'The Internet?',
+                    'That thing is still around?',
+                    'question'
+                );
+                console.log(err)
+            })
+    }
+    componentDidMount() {
+        this.getEmployee();
+    }
 
     render() {
         const data = this.state;
@@ -85,27 +81,27 @@ export default class ViewPenjualan extends Component {
                     <Card.Body>
 
                         <Col md={-2}>
-                            <Link to={"/penjualan"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
+                            <Link to={"/pembelian/"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
                         </Col><br />
-                        <Form>
+                        <Form onSubmit={this.handleSubmit} noValidate>
 
                             <Form.Group as={Row}>
                                 <Form.Label column sm={2}>
-                                    Kode Penjualan
+                                    Kode Pembelian
                                 </Form.Label>
                                 <Col sm={8}>
                                     <Form.Control
-                                        value={this.state.data.kd_penjualan}
+                                        value={this.state.data.kd_pembelian}
                                         />
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row}>
                                 <Form.Label column sm={2}>
-                                    Tanggal Penjualan
+                                    Tanggal Pembelian
                                 </Form.Label>
                                 <Col sm={8}>
                                     <Form.Control
-                                        value={this.state.data.tgl_penjualan}
+                                        value={this.state.data.tgl_pembelian}
                                     />
                                 </Col>
                             </Form.Group>
@@ -121,21 +117,21 @@ export default class ViewPenjualan extends Component {
                             </Form.Group>
                             <Form.Group as={Row}>
                                 <Form.Label column sm={2}>
-                                    Sudah Dibayar
+                                    Kode Supplier
                                 </Form.Label>
                                 <Col sm={8}>
                                     <Form.Control
-                                        value={this.state.data.dibayar}
+                                        value={this.state.data.kd_supplier}
                                     />
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row}>
                                 <Form.Label column sm={2}>
-                                    Total Penjualan
+                                    Total Pembelian
                                 </Form.Label>
                                 <Col sm={8}>
                                     <Form.Control
-                                        value={this.state.data.total_penjualan}
+                                        value={this.state.data.total_pembelian}
                                     />
                                 </Col>
                             </Form.Group>
