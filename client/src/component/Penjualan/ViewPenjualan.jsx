@@ -33,7 +33,7 @@ export default class ViewPenjualan extends Component {
                 console.log(kd_penjualan);
                 console.log(res.data);
                 this.setState({
-                    data: res.data[0]
+                    data: res.data.data[0]
                 });
             })
             .catch(err => {
@@ -81,9 +81,9 @@ export default class ViewPenjualan extends Component {
                     <Card.Body>
 
                         <Col md={-2}>
-                            <Link to={"/penjualan/"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
+                            <Link to={"/penjualan"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
                         </Col><br />
-                        <Form onSubmit={this.handleSubmit} noValidate>
+                        <Form>
 
                             <Form.Group as={Row}>
                                 <Form.Label column sm={2}>

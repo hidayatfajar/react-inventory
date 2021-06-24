@@ -80,7 +80,7 @@ ReactDOM.render(
                     <Route exact path="/laporan/pembelian" component={LaporanPembelian} />
 
                     <Route exact path="/penjualan" component={DataPenjualan} />
-                    <Route exact path="/view/penjualan/:id" component={ViewPenjualan} />
+                    <Route exact path="/view/penjualan/:kd_penjualan" component={ViewPenjualan} />
                     <Route exact path="/add/penjualan" component={AddPenjualan} />
                     <Route exact path="/detail/penjualan" component={DetailPenjualan} />
                     <Route exact path="/laporan/penjualan" component={LaporanPenjualan} />

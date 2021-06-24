@@ -128,7 +128,7 @@ export default class DataPenjualan extends Component {
                 <Row>
 
                   <Col md={-2}>
-                    <Link to={"/view/penjualan/" + row.kd_pembelian}><Button className="mr-2" variant="success" block=""><FontAwesomeIcon icon={faEye} /></Button></Link>
+                    <Link to={"/view/penjualan/"+row.kd_penjualan}><Button className="mr-2" variant="success" block=""><FontAwesomeIcon icon={faEye} /></Button></Link>
                   </Col>
                 </Row>
               </Container>
