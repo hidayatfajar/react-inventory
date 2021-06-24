@@ -49,12 +49,12 @@ export default class AddPembelian extends Component {
         console.log(result.data);
         this.setState({
           nama_barang: "",
-          satuan: '',
-          harga_beli: '',
-          jumlah: '',
-          tgl_pembelian: '',
-          kd_supplier: '',
-          status: ''
+          satuan: "",
+          harga_beli: "",
+          jumlah: "",
+          tgl_pembelian: "",
+          kd_supplier: "",
+          status: ""
         })
         this.validator.hideMessages();
           // this.props.onSubmit(this.state);

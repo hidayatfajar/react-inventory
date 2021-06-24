@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Typography, TextField, Grid, Link, Paper } from '@material-ui/core'
 import axios from 'axios'
-import { Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { Button, Navbar, Nav, Jumbotron, Container, NavDropdown, FormControl, Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import SimpleReactValidator from 'simple-react-validator';
@@ -14,7 +14,7 @@ class Login extends Component {
 
         let loggedIn = true;
         if (login == null) {
-          loggedIn = false
+            loggedIn = false
         }
         this.state = {
             email: "",
@@ -70,7 +70,7 @@ class Login extends Component {
         }
     }
     render() {
-        
+
         return (
             [
                 'Light'
@@ -164,9 +164,12 @@ class Login extends Component {
                                             >Log In</Button>
                                             <Grid container>
                                                 <Grid item>
+                                                    <div style={{ fontSize: 15 }}>
+                                                        Don't have an account? 
                                                     <Link href="/regist" variant="body2">
-                                                        Don't have an account? Sign Up
+                                                        Sign Up
                                                     </Link>
+                                                    </div>
                                                 </Grid>
                                             </Grid>
                                         </form>
