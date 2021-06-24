@@ -7,7 +7,6 @@ const schema = {
 		dibayar: joi.number().required(),
 		quantity: joi.number().required(),
 		loggedIn: joi.boolean()
-
 	})
 }
 

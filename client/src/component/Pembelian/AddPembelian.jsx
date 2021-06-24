@@ -42,7 +42,6 @@ export default class AddPembelian extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state)
     if (this.validator.allValid()) {
     axios.post("http://localhost:8000/pembelian", this.state)
       .then((result) => {
@@ -51,7 +50,6 @@ export default class AddPembelian extends Component {
           nama_barang: "",
           satuan: "",
           harga_beli: "",
-          jumlah: "",
           tgl_pembelian: "",
           kd_supplier: "",
           status: ""
