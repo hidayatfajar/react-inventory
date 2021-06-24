@@ -61,12 +61,14 @@ class Homepage extends Component {
                {/* NavBar */}
           <Navbar bg="dark" variant="dark" fixed="top">
             <Container>
-            <FontAwesomeIcon icon={faCode} />
               <Navbar.Brand href="#">Ourflow</Navbar.Brand>
               <Form inline>
+                
                 <Nav>
-                  <NavDropdown title={data.nama} id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#">Profile</NavDropdown.Item>
+
+                  <NavDropdown title={data.nama}  id="basic-nav-dropdown">
+                    <NavDropdown.Item><Link to="/user">Profile</Link> </NavDropdown.Item>
+
                     <NavDropdown.Divider />
                     <NavDropdown.Item onClick={this.handleClick}>
                       Log out

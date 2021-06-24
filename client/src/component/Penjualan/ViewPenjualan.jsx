@@ -16,38 +16,42 @@ export default class ViewPenjualan extends Component {
     if (login == null) {
       loggedIn = false
     }
-        this.state = {
 
-            id: this.props.match.params.id,
-            data: {},
-            loggedIn
-
-        }
+    this.state = {
+        id: this.props.match.params.id,
+        data: [],
+        loggedIn,
+      };
     }
-
-    getEmployee() {
+    getPostAPI = () => {
         const kd_penjualan = this.state.id
-        console.log(this.state.data)
         axios.get(`http://localhost:8000/penjualan/${kd_penjualan}`)
-            .then(res => {
-                console.log(kd_penjualan);
-                console.log(res.data);
-                this.setState({
-                    data: res.data.data[0]
-                });
-            })
-            .catch(err => {
-                Swal.fire(
-                    'The Internet?',
-                    'That thing is still around?',
-                    'question'
-                );
-                console.log(err)
-            })
-    }
-    componentDidMount() {
-        this.getEmployee();
-    }
+
+          .then((result) => {
+            console.log(result)
+            console.log(result.data.data)
+            this.setState({
+              data: result.data.data[0]
+            });
+          })
+          .catch(err => {
+            Swal.fire(
+              'The Internet?',
+              'That thing is still around?',
+              'question'
+            );
+            console.log(err)
+          })
+      }
+    
+    
+      
+      componentDidMount() {
+        this.getPostAPI();
+    
+      }
+
+
 
     render() {
         const data = this.state;
@@ -117,7 +121,7 @@ export default class ViewPenjualan extends Component {
                             </Form.Group>
                             <Form.Group as={Row}>
                                 <Form.Label column sm={2}>
-                                   Dibayar
+                                    Sudah Dibayar
                                 </Form.Label>
                                 <Col sm={8}>
                                     <Form.Control
