@@ -157,7 +157,7 @@ export default class AddPenjualan extends Component {
                     onChange={this.handleChange}
                     noValidate />
                   <div style={{ fontSize: 15, color: 'red' }}>
-                    {this.validator.message('Satuan', this.state.kd_barang, 'required')}
+                    {this.validator.message('Kode barang', this.state.kd_barang, 'required')}
                   </div>
                 </Col>
               </Form.Group>

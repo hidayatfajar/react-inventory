@@ -154,7 +154,7 @@ export default class DataPembelian extends Component {
             <Navbar.Brand href="#home">Navbar</Navbar.Brand>
             <Form inline>
               <Nav>
-                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                <NavDropdown title="" id="basic-nav-dropdown">
                   <NavDropdown.Item href="#">Profile</NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item onClick={this.handleClick}>

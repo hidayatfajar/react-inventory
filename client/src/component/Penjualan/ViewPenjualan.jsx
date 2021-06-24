@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import {Redirect, Link } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Form, Button, Container, Row, Col, NavDropdown, Navbar, Nav, Card } from 'react-bootstrap';
@@ -12,28 +12,26 @@ export default class ViewPenjualan extends Component {
     constructor(props) {
         super(props);
         const login = JSON.parse(localStorage.getItem('login'))
-    let loggedIn = true
-    if (login == null) {
-      loggedIn = false
-    }
-        this.state = {
-
-            id: this.props.match.params.id,
-            data: {},
-            loggedIn
-
+        let loggedIn = true
+        if (login == null) {
+            loggedIn = false
         }
-    }
 
-    getEmployee() {
+        this.state = {
+            id: this.props.match.params.id,
+            data: [],
+            loggedIn,
+        };
+    }
+    getPostAPI = () => {
         const kd_penjualan = this.state.id
-        console.log(this.state.data)
         axios.get(`http://localhost:8000/penjualan/${kd_penjualan}`)
-            .then(res => {
-                console.log(kd_penjualan);
-                console.log(res.data);
+
+            .then((result) => {
+                console.log(result)
+                console.log(result.data.data)
                 this.setState({
-                    data: res.data.data[0]
+                    data: result.data.data[0]
                 });
             })
             .catch(err => {
@@ -45,9 +43,14 @@ export default class ViewPenjualan extends Component {
                 console.log(err)
             })
     }
+
+
     componentDidMount() {
-        this.getEmployee();
+        this.getPostAPI();
+
     }
+
+
 
     render() {
         const data = this.state;
@@ -92,7 +95,7 @@ export default class ViewPenjualan extends Component {
                                 <Col sm={8}>
                                     <Form.Control
                                         value={this.state.data.kd_penjualan}
-                                        />
+                                    />
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row}>
@@ -117,7 +120,7 @@ export default class ViewPenjualan extends Component {
                             </Form.Group>
                             <Form.Group as={Row}>
                                 <Form.Label column sm={2}>
-                                   Dibayar
+                                    Sudah Dibayar
                                 </Form.Label>
                                 <Col sm={8}>
                                     <Form.Control
