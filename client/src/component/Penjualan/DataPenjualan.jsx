@@ -154,7 +154,7 @@ export default class DataPenjualan extends Component {
             <Form inline>
               <Nav>
                 <NavDropdown title="Akun" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#">Profile</NavDropdown.Item>
+                  <NavDropdown.Item href="/user">Profile</NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item onClick={this.handleClick}>
                     Log out
