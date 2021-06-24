@@ -108,12 +108,6 @@ class Login extends Component {
                                 margin: "auto",
                                 justifyContent: "center",
                             }}>
-                                {/* <Grid item xs={false} sm={4} md={7} style={{
-                    backgroundImage: 'url(https://source.unsplash.com/random)',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                }} /> */}
                                 <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square >
                                     <div className="paper" style={{
                                         display: 'flex',
