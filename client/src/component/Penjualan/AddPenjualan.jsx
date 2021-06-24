@@ -39,52 +39,48 @@ export default class AddPenjualan extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state)
     if (this.validator.allValid()) {
-      e.preventDefault();
-      this.setState({
-        tgl_penjualan: '',
-        kd_barang: '',
-        dibayar: '',
-        quantity: ''
-      })
-    axios.post("http://localhost:8000/penjualan", this.state)
-      .then((result) => {
-        console.log(result.data.error);
-        if(result.data.error == false){
-          Swal.fire(
-            'success',
-            'Data berhasil ditambahkan.',
-            'success'
-          );
-        } else {
+      axios.post("http://localhost:8000/penjualan", this.state)
+        .then((result) => {
+          this.setState({
+            tgl_penjualan: '',
+            kd_barang: '',
+            dibayar: '',
+            quantity: '',
+          })
+          this.validator.hideMessages();
+          // this.props.onSubmit(this.state);
+          console.log(result.data)
+          if (result.data.error == true) {
           Swal.fire(
             'error',
-            'Kode Supplier tidak ditemukan.',
+            'Stok atau Kode Barang tidak ditemukan.',
+            'error'
+            );
+        } else {
+            Swal.fire(
+              'success',
+              'Data berhasil ditambahkan.',
+              'success'
+            );
+        } 
+        // this.props.history.push("/admin")
+      })
+        .catch(err => {
+          Swal.fire(
+            'error',
+            'Terjadi kesalahan silahkan coba beberapa saat lagi',
             'error'
           );
-        }
-        
-        
-        // this.props.history.push("/admin")
-        console.log(result.data)
-        console.log(this.state)
-      })
-      .catch(err => {
-         Swal.fire(
-          'error',
-          'Terjadi kesalahan silahkan coba beberapa saat lagi',
-          'error'
-        );
-        console.log(err)
-      })
-    } else {
-      this.validator.showMessages();
-      // rerender to show messages for the first time
-      // you can use the autoForceUpdate option to do this automatically`
-      this.forceUpdate();
-    }
-  };
+          console.log(err)
+        })
+      } else {
+        this.validator.showMessages();
+        // rerender to show messages for the first time
+        // you can use the autoForceUpdate option to do this automatically`
+        this.forceUpdate();
+      }
+    };
 
 
   render() {
@@ -125,10 +121,10 @@ export default class AddPenjualan extends Component {
             <Form onSubmit={this.handleSubmit} noValidate>
 
               <Form.Group as={Row}>
-                <Form.Label column sm={2}>
+                <Form.Label column sm={3}>
                   Nama Barang
                 </Form.Label>
-                <Col sm={8}>
+                <Col sm={7}>
                   <Form.Control
                     type="date"
 
@@ -147,10 +143,10 @@ export default class AddPenjualan extends Component {
               </Form.Group>
 
               <Form.Group as={Row}>
-                <Form.Label column sm={2}>
+                <Form.Label column sm={3}>
                   Kode Barang
                 </Form.Label>
-                <Col sm={8}>
+                <Col sm={7}>
                   <Form.Control
                     type="text"
                     value={this.state.kd_barang}
@@ -167,10 +163,10 @@ export default class AddPenjualan extends Component {
               </Form.Group>
 
               <Form.Group as={Row}>
-                <Form.Label column sm={2}>
-                  Harga Beli
+                <Form.Label column sm={3}>
+                  Nominal dibayar
                 </Form.Label>
-                <Col sm={8}>
+                <Col sm={7}>
                   <Form.Control
                     type="number"
                     value={this.state.dibayar}
@@ -186,10 +182,10 @@ export default class AddPenjualan extends Component {
               </Form.Group>
 
               <Form.Group as={Row}>
-                <Form.Label column sm={2}>
+                <Form.Label column sm={3}>
                   Jumlah
                 </Form.Label>
-                <Col sm={8}>
+                <Col sm={7}>
                   <Form.Control
                     type="number"
                     value={this.state.quantity}
@@ -206,7 +202,7 @@ export default class AddPenjualan extends Component {
 
               
               <Form.Group as={Row}>
-                <Col sm={{ span: 10, offset: 2 }}>
+                <Col sm={{ span: 10, offset: 3 }}>
                   <Button type="submit" >Tambah</Button>
                 </Col>
               </Form.Group>
