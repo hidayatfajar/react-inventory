@@ -44,6 +44,7 @@ import DataPenjualan from './component/Penjualan/DataPenjualan'
 import AddPenjualan from './component/Penjualan/AddPenjualan'
 import ViewPenjualan from './component/Penjualan/ViewPenjualan'
 import DetailPenjualan from './component/Penjualan/DetailPenjualan';
+import CardUser from './component/Pages/CardUser';
 
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
 ReactDOM.render(
@@ -54,6 +55,7 @@ ReactDOM.render(
                     <Route path="/signup" component={Signup} />
                     <Route exact path="/" component={Welcome} />
                     <Route exact path="/home" component={Homepage} />
+                    <Route exact path="/user" component={CardUser}/>
 
 
                     <Route path="/perusahaan" component={DataPerusahaan} />
@@ -81,6 +83,7 @@ ReactDOM.render(
                     <Route exact path="/view/penjualan/:kd_penjualan" component={ViewPenjualan} />
                     <Route exact path="/add/penjualan" component={AddPenjualan} />
                     <Route exact path="/detail/penjualan" component={DetailPenjualan} />
+                    
                     <Route exact path="/laporan/penjualan" component={LaporanPenjualan} />
 
                     {/* <Route path="/table" component={Table} /> */}
