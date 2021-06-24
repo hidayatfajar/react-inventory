@@ -36,7 +36,7 @@ export default class Pembelian extends Component {
   handleSearch = e => {
     console.log(this.state.awal)
     console.log(this.state.akhir)
-    axios.get(`http://localhost:8000/laporan/penjualan?awal=${this.state.awal}&akhir=${this.state.akhir}`)
+    axios.get(`http://localhost:8000/laporan/pembelian?awal=${this.state.awal}&akhir=${this.state.akhir}`)
     .then((response) => {
       console.log(response)
       this.setState({
@@ -54,7 +54,7 @@ export default class Pembelian extends Component {
   }
 
   getPostAPI = () => {
-    axios.get(`http://localhost:8000/laporan/penjualan?awal=${this.state.awal}&akhir=${this.state.akhir}`)
+    axios.get(`http://localhost:8000/pembelian`)
       .then((result) => {
         console.log(result)
         console.log(result.data.data)
@@ -116,26 +116,26 @@ export default class Pembelian extends Component {
     const { SearchBar } = Search;
     const columns = [
       {
-        dataField: "kd_penjualan",
-        text: "Kode Penjualan",
+        dataField: "kd_admin",
+        text: "Kode Admin",
         sort: true,
       },
       {
-        dataField: "tgl_penjualan",
-        text: "Tanggal Penjualan",
+        dataField: "kd_pembelian",
+        text: "Kode Pembelian",
       },
       {
-        dataField: "kd_admin",
-        text: "Kode Admin",
+        dataField: "kd_supplier",
+        text: "Kode Supplier",
       },
       {
-        dataField: "dibayar",
-        text: "Dibayar",
+        dataField: "tgl_pembelian",
+        text: "Tanggal Pembelian",
       },
       {
-        dataField: "total_penjualan",
-        text: "Total Penjualan",
-      }
+        dataField: "total_pembelian",
+        text: "Total Pembelian",
+      },
     ];
 
     const defaultSorted = [

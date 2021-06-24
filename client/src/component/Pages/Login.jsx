@@ -10,10 +10,11 @@ class Login extends Component {
     constructor(props) {
         super(props)
         const login = JSON.parse(localStorage.getItem('login'))
+        const token = localStorage.getItem('token')
         this.validator = new SimpleReactValidator()
 
         let loggedIn = true;
-        if (login == null) {
+        if (token == null) {
           loggedIn = false
         }
         this.state = {
@@ -70,7 +71,9 @@ class Login extends Component {
         }
     }
     render() {
-        
+        if (this.state.loggedIn === true){
+            <Redirect to="/home" />
+        }
         return (
             [
                 'Light'

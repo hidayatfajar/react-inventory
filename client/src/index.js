@@ -43,6 +43,7 @@ import DetailPembelian from './component/Pembelian/DetailPembelian';
 import DataPenjualan from './component/Penjualan/DataPenjualan'
 import AddPenjualan from './component/Penjualan/AddPenjualan'
 import ViewPenjualan from './component/Penjualan/ViewPenjualan'
+import LaporanPembelian from './component/Laporan/LaporanPembelian'
 import DetailPenjualan from './component/Penjualan/DetailPenjualan';
 
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
@@ -76,6 +77,7 @@ ReactDOM.render(
                     <Route exact path="/view/pembelian/:id" component={ViewPembelian} />
                     <Route exact path="/add/pembelian" component={AddPembelian} />
                     <Route exact path="/detail/pembelian" component={DetailPembelian} />
+                    <Route exact path="/laporan/pembelian" component={LaporanPembelian} />
 
                     <Route exact path="/penjualan" component={DataPenjualan} />
                     <Route exact path="/view/penjualan/:id" component={ViewPenjualan} />

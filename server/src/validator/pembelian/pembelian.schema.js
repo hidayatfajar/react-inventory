@@ -8,7 +8,8 @@ const schema = {
         jumlah : Joi.number().min(1).required(),
         tgl_pembelian : Joi.date().iso().required(),
         kd_supplier : Joi.number().required(),
-        status : Joi.number().max(1).min(0).required()
+        status : Joi.number().max(1).min(0).required(),
+        loggedIn: Joi.boolean()
     })
 }
 
