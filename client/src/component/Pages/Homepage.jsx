@@ -3,6 +3,8 @@ import { Button, Navbar, Nav, Jumbotron, Container, NavDropdown, FormControl, Fo
 import { Redirect, Link } from 'react-router-dom'
 import SideBar from "./SideBar";
 import axios from 'axios'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUserCircle, faUser, faChartLine, faStoreAlt, faCopy, faShoppingBag, faArchive, faClipboardList, faBuilding, faCode } from '@fortawesome/free-solid-svg-icons'
 
 
 class Homepage extends Component {
@@ -59,12 +61,15 @@ class Homepage extends Component {
                {/* NavBar */}
           <Navbar bg="dark" variant="dark" fixed="top">
             <Container>
+            <FontAwesomeIcon icon={faCode} />
               <Navbar.Brand href="#">Ourflow</Navbar.Brand>
               <Form inline>
                 
                 <Nav>
+
                   <NavDropdown title={data.nama}  id="basic-nav-dropdown">
                     <NavDropdown.Item><Link to="/user">Profile</Link> </NavDropdown.Item>
+
                     <NavDropdown.Divider />
                     <NavDropdown.Item onClick={this.handleClick}>
                       Log out
