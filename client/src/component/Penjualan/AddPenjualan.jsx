@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import SimpleReactValidator from 'simple-react-validator';
-import { BrowserRouter as Router, Route, Redirect, Switch, Link } from "react-router-dom";
+import { Redirect,  Link } from "react-router-dom";
 import { Button, Navbar, Nav, Container, Col, Row, Form, NavDropdown, Card } from "react-bootstrap";
-import paginationFactory from "react-bootstrap-table2-paginator";
-import BootstrapTable from "react-bootstrap-table-next";
-import ToolkitProvider, { SearchBar, Search, defaultSorted } from "react-bootstrap-table2-toolkit";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit, faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2'
 import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
 import SideBar from '../Pages/SideBar'
@@ -51,7 +47,7 @@ export default class AddPenjualan extends Component {
           this.validator.hideMessages();
           // this.props.onSubmit(this.state);
           console.log(result.data)
-          if (result.data.error == true) {
+          if (result.data.error === true) {
           Swal.fire(
             'error',
             'Stok atau Kode Barang tidak ditemukan.',

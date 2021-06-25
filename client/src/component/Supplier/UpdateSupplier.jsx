@@ -103,7 +103,6 @@ export default class View extends Component {
     }
 
     render() {
-        const data = this.state;
         if (this.state.loggedIn === false) {
             return <Redirect to="/login" />;
         }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Navbar, Nav, Jumbotron, Container, Carousel, Col, Row} from 'react-bootstrap'
+import { Navbar, Nav, Carousel} from 'react-bootstrap'
 import { Link, Redirect } from 'react-router-dom'
 
 
@@ -19,7 +19,9 @@ export default class Welcome extends Component {
     }
 
     render() {
-      
+      if (this.state.loggedIn === true) {
+        return <Redirect to="/login" />;
+    }
         return (
           <div className="home">
             <div className="Nav">

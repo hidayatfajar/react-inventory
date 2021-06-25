@@ -111,7 +111,6 @@ export default class UpdatePerusahaan extends Component {
     }
 
     render() {
-        const data = this.state;
         if (this.state.loggedIn === false) {
             return <Redirect to="/login" />;
         }

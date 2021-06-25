@@ -17,11 +17,11 @@ export default class ViewPenjualan extends Component {
             loggedIn = false
         }
 
-        this.state = {
-            id: this.props.match.params.id,
-            data: [],
-            loggedIn,
-        };
+    this.state = {
+        id: this.props.match.params.kd_penjualan,
+        data: [],
+        loggedIn,
+      };
     }
     getPostAPI = () => {
         const kd_penjualan = this.state.id
@@ -53,7 +53,6 @@ export default class ViewPenjualan extends Component {
 
 
     render() {
-        const data = this.state;
         if (this.state.loggedIn === false) {
             return <Redirect to="/login" />;
         }
