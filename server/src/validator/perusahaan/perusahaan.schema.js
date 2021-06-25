@@ -5,7 +5,8 @@ const schema = {
 		nama_perusahaan: joi.string().required(),
 		alamat: joi.string().required(),
 		pemilik: joi.string().required(),
-		kota: joi.string().required()
+		kota: joi.string().required(),
+		loggedIn : joi.boolean()
 	})
 }
 
