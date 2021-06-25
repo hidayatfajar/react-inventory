@@ -183,7 +183,7 @@ export default class Signup extends Component {
                             <Grid container>
                                 <Grid item>
                                     <Link to="/login" variant="body2">
-                                        Already have an account ?
+                                        Already have an account ? Login
                                     </Link>
                                 </Grid>
                             </Grid>
