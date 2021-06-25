@@ -26,7 +26,7 @@ export default class AddPenjualan extends Component {
         kd_barang: '',
         dibayar: '',
         quantity: '',
-        loggedIn
+        loggedIn,
     };
   }
 
@@ -128,7 +128,7 @@ export default class AddPenjualan extends Component {
 
               <Form.Group as={Row}>
                 <Form.Label column sm={2}>
-                  Nama Barang
+                  Tanggal Penjualan
                 </Form.Label>
                 <Col sm={8}>
                   <Form.Control
@@ -137,20 +137,20 @@ export default class AddPenjualan extends Component {
                     value={this.state.tgl_penjualan}
                     className=""
                     placeholder="Masukkan Tanggal Penjualan *"
-                    name="nama_barang"
-                    id="nama_barang"
+                    name="tgl_penjualan"
+                    id="tgl_penjualan"
                     noValidate
                     onChange={this.handleChange}
                   />
                   <div style={{ fontSize: 15, color: 'red' }}>
-                    {this.validator.message('Nama Barang', this.state.nama_barang, 'required')}
+                    {this.validator.message('Tanggal Penjualan', this.state.tgl_penjualan, 'required')}
                   </div>
                 </Col>
               </Form.Group>
 
               <Form.Group as={Row}>
                 <Form.Label column sm={2}>
-                  satuan
+                  Kode Barang
                 </Form.Label>
                 <Col sm={8}>
                   <Form.Control
@@ -158,19 +158,19 @@ export default class AddPenjualan extends Component {
                     value={this.state.kd_barang}
                     className=""
                     placeholder="Masukkan Kode Barang *"
-                    name="satuan"
-                    id="satuan"
+                    name="kd_barang"
+                    id="kd_barang"
                     onChange={this.handleChange}
                     noValidate />
                   <div style={{ fontSize: 15, color: 'red' }}>
-                    {this.validator.message('Satuan', this.state.satuan, 'required')}
+                    {this.validator.message('Kode Barang', this.state.kd_barang, 'required')}
                   </div>
                 </Col>
               </Form.Group>
 
               <Form.Group as={Row}>
                 <Form.Label column sm={2}>
-                  Harga Beli
+                  Sudah Dibayar
                 </Form.Label>
                 <Col sm={8}>
                   <Form.Control
@@ -178,11 +178,12 @@ export default class AddPenjualan extends Component {
                     value={this.state.dibayar}
                     className=""
                     placeholder="Masukkan Barang yang Sudah Dibayar *"
-                    name="harga_beli"
+                    name="dibayar"
+                    id="dibayar"
                     onChange={this.handleChange}
                     noValidate />
                   <div style={{ fontSize: 15, color: 'red' }}>
-                    {this.validator.message('Harga Beli', this.state.harga_beli, 'required')}
+                    {this.validator.message('Dibayar', this.state.dibayar, 'required')}
                   </div>
                 </Col>
               </Form.Group>
@@ -197,11 +198,12 @@ export default class AddPenjualan extends Component {
                     value={this.state.quantity}
                     className=""
                     placeholder="Masukkan Quantity *"
-                    name="jumlah"
+                    name="quantity"
+                    id="quantity"
                     onChange={this.handleChange}
                     noValidate />
                   <div style={{ fontSize: 15, color: 'red' }}>
-                    {this.validator.message('Jumlah', this.state.jumlah, 'required')}
+                    {this.validator.message('Jumlah', this.state.quantity, 'required')}
                   </div>
                 </Col>
               </Form.Group>

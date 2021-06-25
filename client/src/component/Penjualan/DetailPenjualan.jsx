@@ -121,7 +121,7 @@ export default class DetailPenjualan extends Component {
       },
       {
         dataField: "kd_penjualan",
-        text: "Kode Pembelian",
+        text: "Kode Penjualan",
         sort: true,
       },
       {

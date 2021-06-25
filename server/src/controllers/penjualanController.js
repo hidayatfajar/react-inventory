@@ -39,7 +39,7 @@ module.exports = {
     },
 
     getDetailById: (req, res) => {
-		Penjualan.getDetailById(req.con, req.params.kd_penjualan, (err, rows) => {
+		Penjualan.getDetailById(req.con, req.params.id_penjualan, (err, rows) => {
 			if(err) throw err
 			res.json(rows)
 		})

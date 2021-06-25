@@ -16,17 +16,17 @@ export default class ViewPenjualan extends Component {
     if (login == null) {
       loggedIn = false
     }
+        this.state = {
+            id: this.props.match.params.id,
+            data: [],
+            loggedIn,
 
-    this.state = {
-        id: this.props.match.params.id,
-        data: [],
-        loggedIn,
-      };
+        };
     }
-    getPostAPI = () => {
-        const kd_penjualan = this.state.id
-        axios.get(`http://localhost:8000/penjualan/${kd_penjualan}`)
 
+    getPostAPI = () => {
+        const kd_penjualan = this.state.id;
+        axios.get(`http://localhost:8000/penjualan/${kd_penjualan}`)
           .then((result) => {
             console.log(result)
             console.log(result.data.data)
@@ -52,7 +52,6 @@ export default class ViewPenjualan extends Component {
       }
 
 
-
     render() {
         const data = this.state;
         if (this.state.loggedIn === false) {
@@ -67,7 +66,7 @@ export default class ViewPenjualan extends Component {
                         <Form inline>
                             <Nav>
                                 <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                                    <NavDropdown.Item href="/user">Profile</NavDropdown.Item>
+                                    <NavDropdown.Item href="#">Profile</NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={this.handleClick}>
                                         Log out
@@ -85,13 +84,13 @@ export default class ViewPenjualan extends Component {
                     <Card.Body>
 
                         <Col md={-2}>
-                            <Link to={"/penjualan"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
+                            <Link to={"/penjualan/"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
                         </Col><br />
-                        <Form>
+                        <Form onSubmit={this.handleSubmit} noValidate>
 
                             <Form.Group as={Row}>
                                 <Form.Label column sm={2}>
-                                    Kode Penjualan
+                                    Kode Pembelian
                                 </Form.Label>
                                 <Col sm={8}>
                                     <Form.Control
@@ -101,7 +100,7 @@ export default class ViewPenjualan extends Component {
                             </Form.Group>
                             <Form.Group as={Row}>
                                 <Form.Label column sm={2}>
-                                    Tanggal Penjualan
+                                    Tanggal Pembelian
                                 </Form.Label>
                                 <Col sm={8}>
                                     <Form.Control
@@ -121,7 +120,7 @@ export default class ViewPenjualan extends Component {
                             </Form.Group>
                             <Form.Group as={Row}>
                                 <Form.Label column sm={2}>
-                                    Sudah Dibayar
+                                    Kode Supplier
                                 </Form.Label>
                                 <Col sm={8}>
                                     <Form.Control
@@ -131,7 +130,7 @@ export default class ViewPenjualan extends Component {
                             </Form.Group>
                             <Form.Group as={Row}>
                                 <Form.Label column sm={2}>
-                                    Total Penjualan
+                                    Total Pembelian
                                 </Form.Label>
                                 <Col sm={8}>
                                     <Form.Control
