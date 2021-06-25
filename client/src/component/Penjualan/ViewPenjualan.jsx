@@ -18,20 +18,20 @@ export default class ViewPenjualan extends Component {
         }
 
         this.state = {
-            id: this.props.match.params.id,
-            data: [],
+            id: this.props.match.params.kd_penjualan,
+            data: {},
             loggedIn,
         };
     }
-    getPostAPI = () => {
+    getPostAPI() {
         const kd_penjualan = this.state.id
+        console.log(this.state.id)
         axios.get(`http://localhost:8000/penjualan/${kd_penjualan}`)
-
-            .then((result) => {
-                console.log(result)
-                console.log(result.data.data)
+            .then((res) => {
+                console.log(res)
+                console.log(res.data.data)
                 this.setState({
-                    data: result.data.data[0]
+                    data: res.data.data[0]
                 });
             })
             .catch(err => {
