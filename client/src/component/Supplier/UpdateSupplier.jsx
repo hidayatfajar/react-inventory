@@ -37,7 +37,9 @@ export default class View extends Component {
                 console.log(kd_supplier);
                 console.log(res.data[0]);
                 this.setState({
-                    data: res.data[0]
+                    kd_supplier: res.data[0].kd_supplier,
+                    nama_supplier: res.data[0].nama_supplier,
+                    alamat: res.data[0].alamat
                 });
             })
             .catch(err => {
@@ -74,6 +76,7 @@ export default class View extends Component {
                         nama_supplier: "",
                         alamat: "",
                     })
+                    this.props.history.push("/supplier")
                     this.validator.hideMessages();
                     console.log(this.state);
                 } else {
@@ -150,11 +153,9 @@ export default class View extends Component {
                                 <Col sm={7}>
                                     <Form.Control type="text"
                                         onChange={this.handleChange}
-                                        value={this.state.data.kd_supplier}
+                                        value={this.state.kd_supplier}
                                         className=""
                                         placeholder="Kode Supplier *"
-                                        name="kd_supplier"
-                                        id="kd_supplier"
                                         noValidate />
                                 </Col>
                             </Form.Group>

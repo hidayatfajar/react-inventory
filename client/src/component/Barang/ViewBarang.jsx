@@ -48,6 +48,12 @@ export default class View extends Component {
     componentDidMount() {
         this.getEmployee();
     }
+    handleChange = e => {
+        e.preventDefault();
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
     handleClick = (e) => {
         localStorage.removeItem("token");
         this.props.history.push("/login");
@@ -94,7 +100,7 @@ export default class View extends Component {
                             <Form.Group as={Row}>
                                 <Form.Label column sm={3}>
                                     Kode Barang :
-                </Form.Label>
+                            </Form.Label>
                                 <Col sm={7}>
                                     <Form.Control value={this.state.data.kd_barang} />
                                 </Col>

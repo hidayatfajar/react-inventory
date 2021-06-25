@@ -39,9 +39,14 @@ export default class UpdateBarang extends Component {
         axios.get(`http://localhost:8000/barang/${kd_barang}`)
             .then(res => {
                 console.log(kd_barang);
-                console.log(res.data.data[0]);
+                console.log(res.data.data[0].kd_barang);
                 this.setState({
-                    data: res.data.data[0]
+                    kd_barang: res.data.data[0].kd_barang,
+                    nama_barang: res.data.data[0].nama_barang,
+                    satuan: res.data.data[0].satuan,
+                    harga_jual: res.data.data[0].harga_jual,
+                    harga_beli: res.data.data[0].harga_beli,
+                    stok: res.data.data[0].stok,
                 });
             })
             .catch(err => {
@@ -88,6 +93,7 @@ export default class UpdateBarang extends Component {
                         stok: "",
                         status: "",
                     })
+                    this.props.history.push("/barang")
                     this.validator.hideMessages();
                     console.log(this.state);
                 } else {
@@ -164,11 +170,9 @@ export default class UpdateBarang extends Component {
                                 <Col sm={8}>
                                     <Form.Control type="text"
                                         onChange={this.handleChange}
-                                        value={this.state.data.kd_barang}
+                                        value={this.state.kd_barang}
                                         className=""
                                         placeholder="Kode Barang *"
-                                        name="kd_barang"
-                                        id="kd_barang"
                                         noValidate />
                                 </Col>
                             </Form.Group>
