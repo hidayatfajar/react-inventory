@@ -1,16 +1,13 @@
 // Libraries
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import axios from 'axios'
-import { BrowserRouter as Router, Route, Redirect, Switch, Link } from "react-router-dom";
-import { Button, Navbar, Nav, Container, Col, Row, Form, NavDropdown, Card } from "react-bootstrap";
+import {Redirect  } from "react-router-dom";
+import { Button, Navbar, Nav, Container, Col, Row, Form, NavDropdown } from "react-bootstrap";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import BootstrapTable from "react-bootstrap-table-next";
 import SideBar from '../Pages/SideBar'
-import ToolkitProvider, { SearchBar, Search, defaultSorted } from "react-bootstrap-table2-toolkit";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit, faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import ToolkitProvider from "react-bootstrap-table2-toolkit";
 import Swal from 'sweetalert2'
-import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
 
 // Component
 
@@ -113,7 +110,6 @@ export default class Pembelian extends Component {
         },
       ], // A numeric array is also available. the purpose of above example is custom the text
     };
-    const { SearchBar } = Search;
     const columns = [
       {
         dataField: "kd_penjualan",

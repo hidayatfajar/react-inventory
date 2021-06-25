@@ -1,10 +1,8 @@
 import React, { Component, Fragment } from 'react'
-import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarFooter, SidebarContent } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
-import { Container, Button, Navbar, Nav, Card, FormControl, NavDropdown, Dropdown } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserCircle, faUser, faChartLine, faStoreAlt, faCopy, faShoppingBag, faArchive, faClipboardList, faBuilding, faCode } from '@fortawesome/free-solid-svg-icons'
+import { faChartLine, faStoreAlt, faShoppingBag, faArchive, faClipboardList, faBuilding, faCode } from '@fortawesome/free-solid-svg-icons'
 import '../Assets/SideBar.css'
 
 export default class SideBar extends Component {
@@ -13,11 +11,11 @@ export default class SideBar extends Component {
   handleClick = e => {
     localStorage.removeItem("token")
     this.props.history.push("/")
-}
-render() {
-  const data = JSON.parse(localStorage.getItem('login'))
-  return (
-    <Fragment>
+  }
+  render() {
+    const data = JSON.parse(localStorage.getItem('login'))
+    return (
+      <Fragment>
 
 
         {/* SideBar */}
@@ -28,10 +26,10 @@ render() {
               <FontAwesomeIcon icon={faCode} />
             </i>
             {/* <p>{this.state.title}</p> */}
-          <br />
-          <div style={{ color : 'whitesmoke' }}>
-            <h5>{data.nama}</h5>
-          </div>
+            <br />
+            <div style={{ color: 'whitesmoke' }}>
+              <h5>{data.nama}</h5>
+            </div>
           </center>
           <hr />
 
@@ -55,12 +53,12 @@ render() {
             <div class="dropbtn"> <h5 className="pjl"><FontAwesomeIcon icon={faStoreAlt} />{' '}Penjualan  </h5></div>
 
             <div class="dropdown-content" eventKey="0">
-
+              {/* eslint-disable-next-line*/}
               <a><Link to="/penjualan" >
                 <b>Data Penjualan</b>
               </Link>
               </a>
-
+              {/* eslint-disable-next-line*/}
               <a><Link to="/laporan/penjualan" >
                 <b>Laporan Penjualan</b>
               </Link>
@@ -73,12 +71,12 @@ render() {
             <div class="dropbtn"> <h5 className="pbl"><FontAwesomeIcon icon={faShoppingBag} />{' '}Pembelian </h5></div>
 
             <div class="dropdown-content" eventKey="1">
-
+              {/* eslint-disable-next-line*/}
               <a><Link to="/pembelian" >
                 <b>Data Pembelian</b>
               </Link>
               </a>
-
+              {/* eslint-disable-next-line*/}
               <a><Link to="/laporan/pembelian" >
                 <b>Laporan Pembelian</b>
               </Link>

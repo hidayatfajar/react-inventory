@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Typography, TextField, Grid, Link, Paper } from '@material-ui/core'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
-import { Button, Navbar, Nav, Jumbotron, Container, NavDropdown, FormControl, Form } from 'react-bootstrap'
+import { Button, Navbar, Nav} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import SimpleReactValidator from 'simple-react-validator';
 
@@ -10,7 +10,6 @@ class Login extends Component {
     constructor(props) {
         super(props)
         const login = JSON.parse(localStorage.getItem('login'))
-        const token = localStorage.getItem('token')
         this.validator = new SimpleReactValidator()
 
         let loggedIn = true;
@@ -71,6 +70,9 @@ class Login extends Component {
         }
     }
     render() {
+        if (this.state.loggedIn === true) {
+            return <Redirect to="/home" />;
+        }
         return (
             [
                 'Light'
@@ -166,7 +168,7 @@ class Login extends Component {
                                                 <Grid item>
                                                     <div style={{ fontSize: 15 }}>
                                                         Don't have an account? 
-                                                    <Link href="/regist" variant="body2">
+                                                    <Link href="/signup" variant="body2">
                                                         Sign Up
                                                     </Link>
                                                     </div>
