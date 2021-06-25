@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import {Redirect, Link } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Form, Button, Container, Row, Col, NavDropdown, Navbar, Nav, Card } from 'react-bootstrap';
@@ -12,10 +12,10 @@ export default class ViewPembelian extends Component {
     constructor(props) {
         super(props);
         const login = JSON.parse(localStorage.getItem('login'))
-    let loggedIn = true
-    if (login == null) {
-      loggedIn = false
-    }
+        let loggedIn = true
+        if (login == null) {
+            loggedIn = false
+        }
         this.state = {
 
             id: this.props.match.params.id,
@@ -50,6 +50,7 @@ export default class ViewPembelian extends Component {
     }
 
     render() {
+        const login = JSON.parse(localStorage.getItem('login'))
         if (this.state.loggedIn === false) {
             return <Redirect to="/login" />;
         }
@@ -58,11 +59,14 @@ export default class ViewPembelian extends Component {
                 {/* NavBar */}
                 <Navbar bg="dark" variant="dark" fixed="top">
                     <Container>
-                        <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+                        <Navbar.Brand>Ourflow</Navbar.Brand>
                         <Form inline>
+
                             <Nav>
-                                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                                    <NavDropdown.Item href="#">Profile</NavDropdown.Item>
+
+                                <NavDropdown title={login.nama} id="basic-nav-dropdown">
+                                    <NavDropdown.Item><Link to="/user">Profile</Link> </NavDropdown.Item>
+
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={this.handleClick}>
                                         Log out
@@ -73,6 +77,7 @@ export default class ViewPembelian extends Component {
                     </Container>
                 </Navbar>
                 <SideBar />
+
                 <Card
                     style={{ width: '62rem' }}
                     className="bagan"
@@ -91,7 +96,7 @@ export default class ViewPembelian extends Component {
                                 <Col sm={8}>
                                     <Form.Control
                                         value={this.state.data.kd_pembelian}
-                                        />
+                                    />
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row}>

@@ -1,7 +1,7 @@
 // Libraries
 import React, { Component } from 'react'
 import axios from 'axios'
-import {Redirect} from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { Button, Navbar, Nav, Container, Col, Row, Form, NavDropdown } from "react-bootstrap";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import BootstrapTable from "react-bootstrap-table-next";
@@ -34,11 +34,11 @@ export default class Pembelian extends Component {
     console.log(this.state.awal)
     console.log(this.state.akhir)
     axios.get(`http://localhost:8000/laporan/pembelian?awal=${this.state.awal}&akhir=${this.state.akhir}`)
-    .then((response) => {
-      console.log(response)
-      this.setState({
-        data: response.data.data
-      });
+      .then((response) => {
+        console.log(response)
+        this.setState({
+          data: response.data.data
+        });
       })
   }
 
@@ -76,6 +76,7 @@ export default class Pembelian extends Component {
     this.props.history.push("/login");
   };
   render() {
+    const login = JSON.parse(localStorage.getItem('login'))
     if (this.state.loggedIn === false) {
       return <Redirect to="/login" />;
     }
@@ -146,11 +147,14 @@ export default class Pembelian extends Component {
         {/* NavBar */}
         <Navbar bg="dark" variant="dark" fixed="top">
           <Container>
-            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+            <Navbar.Brand>Ourflow</Navbar.Brand>
             <Form inline>
+
               <Nav>
-                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#">Profile</NavDropdown.Item>
+
+                <NavDropdown title={login.nama} id="basic-nav-dropdown">
+                  <NavDropdown.Item><Link to="/user">Profile</Link> </NavDropdown.Item>
+
                   <NavDropdown.Divider />
                   <NavDropdown.Item onClick={this.handleClick}>
                     Log out
@@ -173,14 +177,14 @@ export default class Pembelian extends Component {
                 <div>
                   <Row>
                     <Col xs={3}>
-                    <Form.Control type="date" name='awal' id='awal' value={this.state.awal} onChange={this.handleChange} />
+                      <Form.Control type="date" name='awal' id='awal' value={this.state.awal} onChange={this.handleChange} />
                     </Col>
                     <Col xs="auto"><h2>-</h2></Col>
                     <Col xs={3}>
-                    <Form.Control type="date" name='akhir' id='akhir' value={this.state.akhir} onChange={this.handleChange} />
+                      <Form.Control type="date" name='akhir' id='akhir' value={this.state.akhir} onChange={this.handleChange} />
                     </Col>
                     <Col>
-                    <Button onClick={this.handleSearch}>Cari</Button>
+                      <Button onClick={this.handleSearch}>Cari</Button>
                     </Col>
                   </Row>
                 </div>

@@ -1,7 +1,7 @@
 // Libraries
 import React, { Component } from 'react'
 import axios from 'axios'
-import {Redirect  } from "react-router-dom";
+import {Redirect , Link } from "react-router-dom";
 import { Button, Navbar, Nav, Container, Col, Row, Form, NavDropdown } from "react-bootstrap";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import BootstrapTable from "react-bootstrap-table-next";
@@ -51,7 +51,7 @@ export default class Pembelian extends Component {
   }
 
   getPostAPI = () => {
-    axios.get(`http://localhost:8000/laporan/penjualan?awal=${this.state.awal}&akhir=${this.state.akhir}`)
+    axios.get(`http://localhost:8000/penjualan`)
       .then((result) => {
         console.log(result)
         console.log(result.data.data)
@@ -76,6 +76,7 @@ export default class Pembelian extends Component {
     this.props.history.push("/login");
   };
   render() {
+    const login = JSON.parse(localStorage.getItem('login'))
     if (this.state.loggedIn === false) {
       return <Redirect to="/login" />;
     }
@@ -143,25 +144,28 @@ export default class Pembelian extends Component {
 
     return (
       <div>
-        {/* NavBar */}
-        <Navbar bg="dark" variant="dark" fixed="top">
-          <Container>
-            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-            <Form inline>
-              <Nav>
-                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#">Profile</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item onClick={this.handleClick}>
-                    Log out
-                  </NavDropdown.Item>
-                </NavDropdown>
-              </Nav>
-            </Form>
-          </Container>
-        </Navbar>
-        <SideBar />
+      {/* NavBar */}
+      <Navbar bg="dark" variant="dark" fixed="top">
         <Container>
+          <Navbar.Brand>Ourflow</Navbar.Brand>
+          <Form inline>
+
+            <Nav>
+
+              <NavDropdown title={login.nama} id="basic-nav-dropdown">
+                <NavDropdown.Item><Link to="/user">Profile</Link> </NavDropdown.Item>
+
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={this.handleClick}>
+                  Log out
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          </Form>
+        </Container>
+      </Navbar>
+      <SideBar />
+      <Container>
 
           <ToolkitProvider
             keyField="id"

@@ -81,31 +81,38 @@ class CreatePerusahaan extends Component {
             console.log(err)
           })
     };
-
+    handleClick = (e) => {
+        localStorage.removeItem("login");
+        this.props.history.push("/login");
+      };
     render() {
+        const data = JSON.parse(localStorage.getItem('login'))
         if (this.state.loggedIn === false) {
             return <Redirect to="/login" />;
         }
         return (
             <div>
-                {/* NavBar */}
-                <Navbar bg="dark" variant="dark" fixed="top">
-                    <Container>
-                        <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-                        <Form inline>
-                            <Nav>
-                                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                                    <NavDropdown.Item href="#">Profile</NavDropdown.Item>
-                                    <NavDropdown.Divider />
-                                    <NavDropdown.Item onClick={this.handleClick}>
-                                        Log out
-                    </NavDropdown.Item>
-                                </NavDropdown>
-                            </Nav>
-                        </Form>
-                    </Container>
-                </Navbar>
-                <SideBar />
+            {/* NavBar */}
+            <Navbar bg="dark" variant="dark" fixed="top">
+              <Container>
+                <Navbar.Brand>Ourflow</Navbar.Brand>
+                <Form inline>
+      
+                  <Nav>
+      
+                    <NavDropdown title={data.nama} id="basic-nav-dropdown">
+                      <NavDropdown.Item><Link to="/user">Profile</Link> </NavDropdown.Item>
+      
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item onClick={this.handleClick}>
+                        Log out
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                  </Nav>
+                </Form>
+              </Container>
+            </Navbar>
+            <SideBar />
                 <Card 
                 style={{ width: '41rem' }}
                 className="bagan">
