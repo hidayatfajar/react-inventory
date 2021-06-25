@@ -19,7 +19,6 @@ export default class UpdatePerusahaan extends Component {
       loggedIn = false
     }
         this.state = {
-
             id: this.props.match.params.id,
             nama_perusahaan: "",
             alamat: "",
@@ -33,13 +32,16 @@ export default class UpdatePerusahaan extends Component {
 
     getData() {
         const kd_perusahaan = this.state.id
-        console.log(this.state.data)
         axios.get(`http://localhost:8000/perusahaan/${kd_perusahaan}`)
             .then(res => {
                 console.log(kd_perusahaan);
-                console.log(res.data[0]);
+                console.log(this.state.nama_perusahaan)
                 this.setState({
-                    data: res.data[0]
+                    kd_perusahaan: res.data[0].kd_perusahaan,
+                    nama_perusahaan: res.data[0].nama_perusahaan,
+                    alamat: res.data[0].alamat,
+                    pemilik: res.data[0].pemilik,
+                    kota: res.data[0].kota
                 });
             })
             .catch(err => {
@@ -58,7 +60,6 @@ export default class UpdatePerusahaan extends Component {
     editData = e => {
         e.preventDefault();
         const data = {
-            kd_perusahaan: this.state.kd_perusahaan,
             nama_perusahaan: this.state.nama_perusahaan,
             alamat: this.state.alamat,
             pemilik: this.state.pemilik,
@@ -158,11 +159,9 @@ export default class UpdatePerusahaan extends Component {
                                 <Col sm={7}>
                                     <Form.Control type="text"
 
-                                        value={this.state.data.kd_perusahaan}
+                                        value={this.state.kd_perusahaan}
                                         className=""
                                         placeholder="Kode Perusahaan *"
-                                        name="kd_perusahaan"
-                                        id="kd_perusahaan"
                                         onChange={this.handleChange}
                                         noValidate />
                                 </Col>
@@ -211,7 +210,7 @@ export default class UpdatePerusahaan extends Component {
                                 <Col sm={7}>
                                     <Form.Control type="text"
 
-                                        value={this.state.harga_jual}
+                                        value={this.state.pemilik}
                                         className=""
                                         placeholder="Nama Pemilik *"
                                         name="pemilik"
