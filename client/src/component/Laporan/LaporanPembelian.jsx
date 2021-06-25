@@ -1,24 +1,22 @@
 // Libraries
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Redirect,  Link } from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import { Button, Navbar, Nav, Container, Col, Row, Form, NavDropdown } from "react-bootstrap";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import BootstrapTable from "react-bootstrap-table-next";
 import SideBar from '../Pages/SideBar'
-import ToolkitProvider, {  Search } from "react-bootstrap-table2-toolkit";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faEye } from '@fortawesome/free-solid-svg-icons';
+import ToolkitProvider from "react-bootstrap-table2-toolkit";
 import Swal from 'sweetalert2'
 
 // Component
 
-import './Penjualan.css'
 
-export default class DataPenjualan extends Component {
+export default class Pembelian extends Component {
   constructor(props) {
     super(props)
     const login = JSON.parse(localStorage.getItem('login'))
+
     let loggedIn = true
     if (login == null) {
       loggedIn = false
@@ -27,11 +25,33 @@ export default class DataPenjualan extends Component {
     this.state = {
       data: [],
       loggedIn,
+      awal: "",
+      akhir: ""
     };
   }
 
+  handleSearch = e => {
+    console.log(this.state.awal)
+    console.log(this.state.akhir)
+    axios.get(`http://localhost:8000/laporan/pembelian?awal=${this.state.awal}&akhir=${this.state.akhir}`)
+    .then((response) => {
+      console.log(response)
+      this.setState({
+        data: response.data.data
+      });
+      })
+  }
+
+  handleChange = e => {
+    e.preventDefault();
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+    console.log(this.state.awal)
+  }
+
   getPostAPI = () => {
-    axios.get('http://localhost:8000/penjualan')
+    axios.get(`http://localhost:8000/pembelian`)
       .then((result) => {
         console.log(result)
         console.log(result.data.data)
@@ -48,12 +68,8 @@ export default class DataPenjualan extends Component {
         console.log(err)
       })
   }
-
-
-  
   componentDidMount() {
     this.getPostAPI();
-
   }
   handleClick = (e) => {
     localStorage.removeItem("token");
@@ -94,48 +110,28 @@ export default class DataPenjualan extends Component {
         },
       ], // A numeric array is also available. the purpose of above example is custom the text
     };
-    const { SearchBar } = Search;
     const columns = [
-      {
-        dataField: "kd_penjualan",
-        text: "Kode Penjualan",
-        sort: true,
-      },
-      {
-        dataField: "tgl_penjualan",
-        text: "Tanggal Penjualan",
-      },
       {
         dataField: "kd_admin",
         text: "Kode Admin",
+        sort: true,
       },
       {
-        dataField: "dibayar",
-        text: "Dibayar",
+        dataField: "kd_pembelian",
+        text: "Kode Pembelian",
       },
       {
-        dataField: "total_penjualan",
-        text: "Total Penjualan",
+        dataField: "kd_supplier",
+        text: "Kode Supplier",
       },
       {
-        dataField: "Link",
-        text: "Action",
-        formatter: (rowContent, row, props) => {
-          return (
-            <div>
-              <Container>
-                <Row>
-
-                  <Col md={-2}>
-                    <Link to={"/view/penjualan/" + row.kd_penjualan}><Button className="mr-2" variant="success" block=""><FontAwesomeIcon icon={faEye} /></Button></Link>
-
-                  </Col>
-                </Row>
-              </Container>
-            </div >
-          )
-        }
-      }
+        dataField: "tgl_pembelian",
+        text: "Tanggal Pembelian",
+      },
+      {
+        dataField: "total_pembelian",
+        text: "Total Pembelian",
+      },
     ];
 
     const defaultSorted = [
@@ -153,8 +149,8 @@ export default class DataPenjualan extends Component {
             <Navbar.Brand href="#home">Navbar</Navbar.Brand>
             <Form inline>
               <Nav>
-                <NavDropdown title="Akun" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="/user">Profile</NavDropdown.Item>
+                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="#">Profile</NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item onClick={this.handleClick}>
                     Log out
@@ -164,9 +160,7 @@ export default class DataPenjualan extends Component {
             </Form>
           </Container>
         </Navbar>
-
         <SideBar />
-
         <Container>
 
           <ToolkitProvider
@@ -177,19 +171,16 @@ export default class DataPenjualan extends Component {
             {(props) => (
               <div className="back">
                 <div>
-
                   <Row>
-
-                    <Col xs={1}>
-                      <Link to="/add/penjualan"><Button className="mr-2" variant="primary" block="">Create</Button></Link>
+                    <Col xs={3}>
+                    <Form.Control type="date" name='awal' id='awal' value={this.state.awal} onChange={this.handleChange} />
                     </Col>
-                    <Col xs={2}>
-                      <Link to="/detail/penjualan"><Button className="mr-2" variant="secondary" block="">Detail</Button></Link>
+                    <Col xs="auto"><h2>-</h2></Col>
+                    <Col xs={3}>
+                    <Form.Control type="date" name='akhir' id='akhir' value={this.state.akhir} onChange={this.handleChange} />
                     </Col>
                     <Col>
-                      <div className="float-right">
-                        <SearchBar {...props.searchProps} />
-                      </div>
+                    <Button onClick={this.handleSearch}>Cari</Button>
                     </Col>
                   </Row>
                 </div>

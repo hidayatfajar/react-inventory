@@ -31,8 +31,13 @@ module.exports = {
         con.query(`SELECT * FROM d_penjualan WHERE id_penjualan LIKE '%${search}%' OR kd_penjualan LIKE '%${search}%' OR kd_barang LIKE '%${search}%' OR jumlah LIKE '%${search}%' OR subtotal LIKE '%${search}%' ORDER BY ${orderBy} ${sort}`, callback)
     },
 
+<<<<<<< HEAD
     getDetailById: (con, id_penjualan, callback) => {
 		con.query(`SELECT * FROM d_penjualan WHERE id_penjualan = ${id_penjualan}`, callback)
+=======
+    getDetailById: (con, kd_penjualan, callback) => {
+		con.query(`SELECT * FROM d_penjualan WHERE kd_penjualan = ${kd_penjualan}`, callback)
+>>>>>>> fajar/main
     },
 
     getLaporan: (con, data, callback) => {

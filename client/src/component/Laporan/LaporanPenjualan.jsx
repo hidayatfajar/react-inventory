@@ -1,16 +1,13 @@
 // Libraries
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import axios from 'axios'
-import { BrowserRouter as Router, Route, Redirect, Switch, Link } from "react-router-dom";
-import { Button, Navbar, Nav, Container, Col, Row, Form, NavDropdown, Card } from "react-bootstrap";
+import {Redirect  } from "react-router-dom";
+import { Button, Navbar, Nav, Container, Col, Row, Form, NavDropdown } from "react-bootstrap";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import BootstrapTable from "react-bootstrap-table-next";
 import SideBar from '../Pages/SideBar'
-import ToolkitProvider, { SearchBar, Search, defaultSorted } from "react-bootstrap-table2-toolkit";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit, faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import ToolkitProvider from "react-bootstrap-table2-toolkit";
 import Swal from 'sweetalert2'
-import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
 
 // Component
 
@@ -28,27 +25,33 @@ export default class Pembelian extends Component {
     this.state = {
       data: [],
       loggedIn,
-      awal : "",
-      akhir : ""
+      awal: "",
+      akhir: ""
     };
   }
 
   handleSearch = e => {
-      console.warn(this.state.awal)
-      console.warn(this.state.akhir)
-      console.log(`http://localhost:8000/laporan/penjualan?awal${this.state.awal}&akhir${this.state.akhir}`)
+    console.log(this.state.awal)
+    console.log(this.state.akhir)
+    axios.get(`http://localhost:8000/laporan/penjualan?awal=${this.state.awal}&akhir=${this.state.akhir}`)
+    .then((response) => {
+      console.log(response)
+      this.setState({
+        data: response.data.data
+      });
+      })
   }
 
   handleChange = e => {
     e.preventDefault();
-        this.setState({
-            [e.target.name]: e.target.value
-        })
+    this.setState({
+      [e.target.name]: e.target.value
+    })
     console.log(this.state.awal)
   }
 
   getPostAPI = () => {
-    axios.get(`http://localhost:8000/laporan/penjualan?awal${this.state.awal}&akhir${this.state.akhir}`)
+    axios.get(`http://localhost:8000/laporan/penjualan?awal=${this.state.awal}&akhir=${this.state.akhir}`)
       .then((result) => {
         console.log(result)
         console.log(result.data.data)
@@ -107,7 +110,6 @@ export default class Pembelian extends Component {
         },
       ], // A numeric array is also available. the purpose of above example is custom the text
     };
-    const { SearchBar } = Search;
     const columns = [
       {
         dataField: "kd_penjualan",
@@ -169,38 +171,16 @@ export default class Pembelian extends Component {
             {(props) => (
               <div className="back">
                 <div>
-
                   <Row>
-
-                    <Col xs={2}>
-                      <Link to="/add/barang"><Button className="mr-2" variant="primary" block="">Create</Button></Link>
+                    <Col xs={3}>
+                    <Form.Control type="date" name='awal' id='awal' value={this.state.awal} onChange={this.handleChange} />
                     </Col>
-                    <Col xs={4}>
-                      <Form >
-                        <Form.Group as={Row}>
-                          <Col sm={8}>
-                            <Form.Control type="date" name='awal' id='awal' value={this.state.awal} onChange={this.handleChange}/>
-                          </Col>
-                        </Form.Group>
-                      </Form>
-                    </Col>
-                    <Col xs={4}>
-                      <Form >
-                        <Form.Group as={Row}>
-                          <Col sm={8}>
-                            <Form.Control type="date" name='akhir' id='akhir' value={this.state.akhir} onChange={this.handleChange}/>
-                          </Col>
-                        </Form.Group>
-                      </Form>
+                    <Col xs="auto"><h2>-</h2></Col>
+                    <Col xs={3}>
+                    <Form.Control type="date" name='akhir' id='akhir' value={this.state.akhir} onChange={this.handleChange} />
                     </Col>
                     <Col>
-                    <Button onClick={this.handleSearch}></Button>
-                    </Col>
-
-                    <Col>
-                      <div className="float-right">
-                        <SearchBar {...props.searchProps} />
-                      </div>
+                    <Button onClick={this.handleSearch}>Cari</Button>
                     </Col>
                   </Row>
                 </div>

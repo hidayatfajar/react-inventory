@@ -1,12 +1,12 @@
 // Libraries
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import axios from 'axios'
-import { BrowserRouter as Router, Route, Redirect, Switch, Link } from "react-router-dom";
+import {Redirect, Link } from "react-router-dom";
 import { Button, Navbar, Nav, Container, Col, Row, Form, NavDropdown } from "react-bootstrap";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import BootstrapTable from "react-bootstrap-table-next";
 import SideBar from '../Pages/SideBar'
-import ToolkitProvider, { SearchBar, Search, defaultSorted } from "react-bootstrap-table2-toolkit";
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Swal from 'sweetalert2'
 // Component

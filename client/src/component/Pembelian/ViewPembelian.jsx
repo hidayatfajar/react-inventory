@@ -50,7 +50,6 @@ export default class ViewPembelian extends Component {
     }
 
     render() {
-        const data = this.state;
         if (this.state.loggedIn === false) {
             return <Redirect to="/login" />;
         }

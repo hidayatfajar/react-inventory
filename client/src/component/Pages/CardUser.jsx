@@ -1,8 +1,6 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { Navbar, Container, Form, Nav, NavDropdown } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserCircle, faUser, faChartLine, faStoreAlt, faCopy, faShoppingBag } from '@fortawesome/free-solid-svg-icons'
-import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import SideBar from "./SideBar"
 import axios from 'axios'
 import '../Assets/CardUser.css'
@@ -82,7 +80,7 @@ export default class CardUser extends Component {
 
                     <div className="cardusr 1">
                         <div className="cardusr_image">
-                            <img src="https://i.pinimg.com/564x/5f/40/6a/5f406ab25e8942cbe0da6485afd26b71.jpg" />
+                            <img src="https://i.pinimg.com/564x/5f/40/6a/5f406ab25e8942cbe0da6485afd26b71.jpg" alt="" />
                         </div>
                         <div className="cardusr_title title-white">
                             <p>{data.nama}</p>
