@@ -234,6 +234,7 @@ export default class AddPembelian extends Component {
                 <Col sm={8}>
                   <Form.Control
                     type="number"
+                    min = {0}
                     value={this.state.kd_supplier}
                     className=""
                     placeholder="Masukkan Kode Supplier *"

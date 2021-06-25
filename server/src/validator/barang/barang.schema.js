@@ -8,7 +8,8 @@ const schema = {
 		harga_jual: joi.number().required(),
 		harga_beli: joi.number().required(),
 		stok: joi.number().required(),
-		status: joi.required()
+		status: joi.required(),
+		loggedIn : joi.boolean()
 	})
 }
 
