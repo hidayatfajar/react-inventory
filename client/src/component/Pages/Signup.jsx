@@ -3,7 +3,7 @@ import '../Assets/Signup.css';
 import SimpleReactValidator from 'simple-react-validator';
 import { Grid, Paper, Typography, TextField } from '@material-ui/core'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Button, Card, Form, Navbar, Nav, Container, Col } from 'react-bootstrap'
+import { Button, Navbar, Nav } from 'react-bootstrap'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 import {Redirect, Link } from 'react-router-dom'
@@ -18,7 +18,7 @@ export default class Signup extends Component {
     if (login == null) {
       loggedIn = false
     }
-        this.validator = new SimpleReactValidator;
+        this.validator = new SimpleReactValidator();
         this.state = {
           nama: "",
           email: "",
@@ -49,7 +49,19 @@ export default class Signup extends Component {
                 email: "",
                 password: ""
               })
-              alert(response.data)
+              if (response.data.error === false)
+              Swal.fire(
+                'Success',
+                `${response.data.message}`,
+                'success'
+              );
+              else {
+                Swal.fire(
+                  'Error',
+                  `${response.data.message}`,
+                  'error'
+                );
+              }
           })
         } else {
           this.validator.showMessages();
@@ -60,7 +72,9 @@ export default class Signup extends Component {
   }
 
   render() {
-   
+    if (this.state.loggedIn === true) {
+      return <Redirect to="/login" />;
+  }
     return (
 
       ['Light'].map((variant, idx) => (
@@ -158,10 +172,6 @@ export default class Signup extends Component {
                             />
                             {this.validator.message('password', this.state.password, `required|min:6`,  { className: 'text-danger' })}
                             </div>
-                            {/* <FormControlLabel
-                                control={<Checkbox value="remember" color="primary" />}
-                                label="Remember me"
-                            /> */}
                             <hr/>
                             <Button
                                 type="submit"
@@ -172,7 +182,7 @@ export default class Signup extends Component {
                             >Sign Up</Button>
                             <Grid container>
                                 <Grid item>
-                                    <Link href="/" variant="body2">
+                                    <Link to="/login" variant="body2">
                                         Already have an account ?
                                     </Link>
                                 </Grid>

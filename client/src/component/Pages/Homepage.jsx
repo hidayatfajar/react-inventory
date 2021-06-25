@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import { Button, Navbar, Nav, Jumbotron, Container, NavDropdown, FormControl, Form } from 'react-bootstrap'
+import { Button, Navbar, Nav, Jumbotron, Container, NavDropdown, Form } from 'react-bootstrap'
 import { Redirect, Link } from 'react-router-dom'
 import SideBar from "./SideBar";
 import axios from 'axios'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserCircle, faUser, faChartLine, faStoreAlt, faCopy, faShoppingBag, faArchive, faClipboardList, faBuilding, faCode } from '@fortawesome/free-solid-svg-icons'
 
 
 class Homepage extends Component {

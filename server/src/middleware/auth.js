@@ -22,7 +22,7 @@ module.exports = {
                     con.query('INSERT INTO admin SET ?', [post], err => {
                         if (err) res.send(err.sqlMessage, 400)
 
-                        res.send("Berhasil menambahkan admin baru", 201)
+                        res.json({error : false, message :"Berhasil menambahkan admin baru"})
 
                         con.commit(err => {
                             if (err) {
@@ -32,7 +32,7 @@ module.exports = {
                         })
                     })
                 } else {
-                    res.send("Email sudah terdaftar")
+                    res.json({error : true , message:"Email sudah terdaftar"})
                     con.rollback()
                 }
             })
