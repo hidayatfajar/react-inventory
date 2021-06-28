@@ -46,6 +46,7 @@ import ViewPenjualan from './component/Penjualan/ViewPenjualan'
 import LaporanPembelian from './component/Laporan/LaporanPembelian'
 import DetailPenjualan from './component/Penjualan/DetailPenjualan';
 import CardUser from './component/Pages/CardUser';
+import Useredit from './component/Pages/Useredit'
 
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
 ReactDOM.render(
@@ -57,7 +58,8 @@ ReactDOM.render(
                     <Route exact path="/" component={Welcome} />
                     <Route exact path="/home" component={Homepage} />
                     <Route exact path="/user" component={CardUser}/>
-
+                    <Route exact path="/edituser" component={Useredit}/>
+                    
 
                     <Route path="/perusahaan" component={DataPerusahaan} />
                     <Route path="/view/perusahaan/:id" component={ViewPerusahaan} />

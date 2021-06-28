@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Navbar, Container, Form, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar, Container, Form, Nav, NavDropdown, Button } from 'react-bootstrap';
 import { Redirect, Link } from "react-router-dom";
 import SideBar from "./SideBar"
 import axios from 'axios'
@@ -81,13 +81,13 @@ export default class CardUser extends Component {
                 <div className="cardsusr-list">
 
                     <div className="cardusr 1">
-                        <div className="cardusr_image">
+                          <Button className="cardusr_image" variant="dark">
+                            <Link className="cardusr_image" to="/edituser">
                             <img src="https://i.pinimg.com/564x/5f/40/6a/5f406ab25e8942cbe0da6485afd26b71.jpg" alt="" />
-                        </div>
+                            </Link>
+                          </Button>
                         <div className="cardusr_title title-white">
                             <p>{data.nama}</p>
-                            <p>{data.email}</p>
-
                         </div>
                     </div>
                     {/* <div className="position" style={{color: 'black'}}>

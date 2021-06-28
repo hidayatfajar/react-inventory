@@ -63,6 +63,9 @@ module.exports = {
                     return obj.gambar
                 })
 
+                let password = rows.map(obj => {
+                    return obj.password
+                })
                 const data = {
                     kd_admin: kd_admin,
                     akses_token: token
@@ -77,7 +80,8 @@ module.exports = {
                         kd_admin: kd_admin,
                         nama : nama,
                         email : email,
-                        gambar : gambar
+                        gambar : gambar,
+                        password : password
                     })
                 })
             } else {

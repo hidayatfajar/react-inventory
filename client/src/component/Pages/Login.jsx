@@ -51,13 +51,15 @@ class Login extends Component {
                         console.log(this.state.dataError)
                     } else {
                         console.log(response.data)
+                        console.log(response)
                         localStorage.setItem('login', JSON.stringify({
                             login: true,
                             token: response.data.token,
                             kd_admin: response.data.kd_admin,
                             nama: response.data.nama,
                             gambar: response.data.gambar,
-                            email: response.data.email
+                            email: response.data.email,
+                            password : response.data.password
                         }))
                         this.props.history.push("/home")
                     }

@@ -1,8 +1,11 @@
 import { React, Component } from 'react'
-import { Button, Navbar, Nav, Jumbotron, Container, NavDropdown, Form } from 'react-bootstrap'
+import { Button, Navbar, Nav, Jumbotron, Container, NavDropdown, Form, Col, Image, Row } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCode } from '@fortawesome/free-solid-svg-icons'
 import { Redirect, Link } from 'react-router-dom'
 import SideBar from "./SideBar";
 import axios from 'axios'
+import image from '../Assets/Kodok Senyum.jpg'
 
 
 class Homepage extends Component {
@@ -78,13 +81,20 @@ class Homepage extends Component {
 
           <Jumbotron>
             <Container>
-              <h1>Welcome, {data.nama}</h1>
-              <p className="a">
-                Welcome to react bootstrap homepage, this is where you started
-              </p>
-              <p>
-                <Button variant="primary">Learn more</Button>
-              </p>
+              <Row>
+              <Col xs={1}>
+                <Image width={64} height={64} src={image} alt="INI GAMBAR" roundedCircle />
+              </Col>
+              <Col>
+                <h1>Welcome, {data.nama}</h1>
+                <p className="a">
+                  Welcome to react bootstrap homepage, this is where you started
+                </p>
+                <p>
+                  <Button variant="primary">Learn more</Button>
+                </p>
+              </Col>
+              </Row>
             </Container>
           </Jumbotron>
         </div>

@@ -2,8 +2,10 @@ import React, { Component, Fragment } from 'react'
 import 'react-pro-sidebar/dist/css/styles.css';
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {Image} from 'react-bootstrap'
 import { faChartLine, faStoreAlt, faShoppingBag, faArchive, faClipboardList, faBuilding, faCode } from '@fortawesome/free-solid-svg-icons'
 import '../Assets/SideBar.css'
+import image from '../Assets/Kodok Senyum.jpg'
 
 export default class SideBar extends Component {
 
@@ -23,8 +25,9 @@ export default class SideBar extends Component {
         <div class="sidenav">
           <center>
             <i class="fal fa-4x">
-              <FontAwesomeIcon icon={faCode} />
+            <Image width={100} height={100} src={image} alt="INI GAMBAR" roundedCircle />
             </i>
+            <br/>
             {/* <p>{this.state.title}</p> */}
             <br />
             <div style={{ color: 'whitesmoke' }}>
