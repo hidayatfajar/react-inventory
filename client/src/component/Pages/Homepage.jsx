@@ -12,16 +12,15 @@ class Homepage extends Component {
   constructor(props) {
     super(props)
     const login = JSON.parse(localStorage.getItem('login'))
-    console.log(login)
     let loggedIn = true;
     if (login == null) {
       loggedIn = false;
     }
     this.state = {
       loggedIn,
-      state: {}
+      state: {},
+      admin : []
     }
-    console.log(this.state.state.admin)
   }
 
   state = {};
@@ -32,9 +31,9 @@ class Homepage extends Component {
         "Authorization": "Bearer " + login.token
       }
     }
-    axios.get('admin/' + login.kd_admin, axiosConfig)
+    axios.get('http://localhost:8000/admin/' + login.kd_admin, axiosConfig)
       .then(res => {
-        console.log(res.data.token)
+        console.log(res.data.data[0].nama)
         this.setState({
           admin: res.data.data[0]
         })
@@ -43,7 +42,9 @@ class Homepage extends Component {
         console.log(err)
       })
   }
-
+  componentDidMount () {
+    this.getAdmin()
+  }
   handleClick = e => {
     localStorage.removeItem("login")
     this.props.history.push("/login")
@@ -64,7 +65,7 @@ class Homepage extends Component {
 
               <Nav>
 
-                <NavDropdown title={data.nama} id="basic-nav-dropdown">
+                <NavDropdown title={this.state.admin.nama} id="basic-nav-dropdown">
                   <NavDropdown.Item><Link to="/user">Profile</Link> </NavDropdown.Item>
 
                   <NavDropdown.Divider />
@@ -86,7 +87,7 @@ class Homepage extends Component {
                 <Image width={64} height={64} src={image} alt="INI GAMBAR" roundedCircle />
               </Col>
               <Col>
-                <h1>Welcome, {data.nama}</h1>
+                <h1>Welcome, {this.state.admin.nama}</h1>
                 <p className="a">
                   Welcome to react bootstrap homepage, this is where you started
                 </p>

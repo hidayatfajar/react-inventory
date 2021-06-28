@@ -6,14 +6,43 @@ import {Image} from 'react-bootstrap'
 import { faChartLine, faStoreAlt, faShoppingBag, faArchive, faClipboardList, faBuilding, faCode } from '@fortawesome/free-solid-svg-icons'
 import '../Assets/SideBar.css'
 import image from '../Assets/Kodok Senyum.jpg'
+import axios from 'axios'
 
 export default class SideBar extends Component {
+  constructor (props){
+    super(props)
+    this.state = {
+      admin : ""
+    }
+  }
 
 
   handleClick = e => {
     localStorage.removeItem("token")
     this.props.history.push("/")
   }
+
+  getAdmin = () => {
+    const login = JSON.parse(localStorage.getItem('login'))
+    const axiosConfig = {
+      "headers": {
+        "Authorization": "Bearer " + login.token
+      }
+    }
+    axios.get('http://localhost:8000/admin/' + login.kd_admin, axiosConfig)
+      .then(res => {
+        this.setState({
+          admin: res.data.data[0]
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+  componentDidMount () {
+    this.getAdmin()
+  }
+
   render() {
     const data = JSON.parse(localStorage.getItem('login'))
     return (
@@ -31,10 +60,9 @@ export default class SideBar extends Component {
             {/* <p>{this.state.title}</p> */}
             <br />
             <div style={{ color: 'whitesmoke' }}>
-              <h5>{data.nama}</h5>
+              <h5>{this.state.admin.nama}</h5>
             </div>
           </center>
-          <hr />
 
           <Link to="/home" >
             <h5 className="dash"> <FontAwesomeIcon icon={faChartLine} />{' '}Dashboard  </h5>
