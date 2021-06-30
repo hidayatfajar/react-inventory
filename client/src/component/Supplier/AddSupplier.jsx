@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import SimpleReactValidator from 'simple-react-validator';
 import { Form, Button, Container, Row, Col, NavDropdown, Navbar, Nav, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -22,8 +21,24 @@ class Create extends Component {
     this.state = {
       nama_supplier: "",
       alamat: "",
-      loggedIn
+      loggedIn,
+      admin : []
     }
+  }
+
+  componentDidMount () {
+      const login = JSON.parse(localStorage.getItem('login'))
+      axios.get('http://localhost:8000/admin/' + login.kd_admin)
+          .then(res => {
+            console.log(res.data.data[0])
+              this.setState({
+                  admin: res.data.data[0]
+              })
+              console.log(this.state.admin)
+          })
+          .catch(err => {
+              console.log(err)
+          })
   }
 
   handleChange = e => {
@@ -88,7 +103,7 @@ class Create extends Component {
       
                   <Nav>
       
-                    <NavDropdown title={data.nama} id="basic-nav-dropdown">
+                    <NavDropdown title={this.state.admin.nama} id="basic-nav-dropdown">
                       <NavDropdown.Item><Link to="/user">Profile</Link> </NavDropdown.Item>
       
                       <NavDropdown.Divider />

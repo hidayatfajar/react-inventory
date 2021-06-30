@@ -27,8 +27,24 @@ export default class DataPenjualan extends Component {
     this.state = {
       data: [],
       loggedIn,
+      admin : []
     };
   }
+
+  getAdmin = () => {
+    const login = JSON.parse(localStorage.getItem('login'))
+    axios.get('http://localhost:8000/admin/' + login.kd_admin)
+        .then(res => {
+          console.log(res.data.data[0])
+            this.setState({
+                admin: res.data.data[0]
+            })
+            console.log(this.state.admin)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
 
   getPostAPI = () => {
     axios.get('http://localhost:8000/penjualan')
@@ -53,6 +69,7 @@ export default class DataPenjualan extends Component {
   
   componentDidMount() {
     this.getPostAPI();
+    this.getAdmin()
 
   }
   handleClick = (e) => {
@@ -156,7 +173,7 @@ export default class DataPenjualan extends Component {
 
             <Nav>
 
-              <NavDropdown title={login.nama} id="basic-nav-dropdown">
+              <NavDropdown title={this.state.admin.nama} id="basic-nav-dropdown">
                 <NavDropdown.Item><Link to="/user">Profile</Link> </NavDropdown.Item>
 
                 <NavDropdown.Divider />

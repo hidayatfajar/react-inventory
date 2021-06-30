@@ -20,9 +20,25 @@ export default class View extends Component {
 
             id: this.props.match.params.id,
             data: {},
-            loggedIn
+            loggedIn,
+            admin : []
 
         }
+    }
+
+    getAdmin = () => {
+        const login = JSON.parse(localStorage.getItem('login'))
+        axios.get('http://localhost:8000/admin/' + login.kd_admin)
+            .then(res => {
+              console.log(res.data.data[0])
+                this.setState({
+                    admin: res.data.data[0]
+                })
+                console.log(this.state.admin)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     getEmployee() {
@@ -47,6 +63,7 @@ export default class View extends Component {
     }
     componentDidMount() {
         this.getEmployee();
+        this.getAdmin()
     }
     handleChange = e => {
         e.preventDefault();
@@ -73,7 +90,7 @@ export default class View extends Component {
 
               <Nav>
 
-                <NavDropdown title={data.nama} id="basic-nav-dropdown">
+                <NavDropdown title={this.state.admin.nama} id="basic-nav-dropdown">
                   <NavDropdown.Item><Link to="/user">Profile</Link> </NavDropdown.Item>
 
                   <NavDropdown.Divider />

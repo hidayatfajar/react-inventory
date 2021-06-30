@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import SimpleReactValidator from 'simple-react-validator';
 import { Form, Button, Container, Row, Col, NavDropdown, Navbar, Nav, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Redirect, Link } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import axios from 'axios'
 import SideBar from '../Pages/SideBar'
 import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
@@ -12,7 +12,7 @@ import Swal from 'sweetalert2'
 class AddBarang extends Component {
   constructor(props) {
     super(props);
-    this.validator = new SimpleReactValidator({autoForceUpdate: this});
+    this.validator = new SimpleReactValidator({ autoForceUpdate: this });
     const login = JSON.parse(localStorage.getItem('login'))
     let loggedIn = true
     if (login == null) {
@@ -27,9 +27,34 @@ class AddBarang extends Component {
       harga_beli: "",
       stok: "",
       status: null,
-      loggedIn
+      loggedIn,
+      admin : []
 
     }
+  }
+
+  getAdmin = () => {
+    const login = JSON.parse(localStorage.getItem('login'))
+    const axiosConfig = {
+      "headers": {
+        "Authorization": "Bearer " + login.token
+      }
+    }
+    axios.get('http://localhost:8000/admin/' + login.kd_admin, axiosConfig)
+      .then(res => {
+        console.log(res.data.data[0])
+        this.setState({
+          admin: res.data.data[0]
+        })
+        console.log(this.state.admin)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  componentDidMount () {
+    this.getAdmin()
   }
 
   handleChange = e => {
@@ -86,30 +111,30 @@ class AddBarang extends Component {
     const data = JSON.parse(localStorage.getItem('login'))
     if (this.state.loggedIn === false) {
       return <Redirect to="/login" />;
-  }
+    }
     return (
       <div>
-            {/* NavBar */}
-            <Navbar bg="dark" variant="dark" fixed="top">
-              <Container>
-                <Navbar.Brand>Ourflow</Navbar.Brand>
-                <Form inline>
-      
-                  <Nav>
-      
-                    <NavDropdown title={data.nama} id="basic-nav-dropdown">
-                      <NavDropdown.Item><Link to="/user">Profile</Link> </NavDropdown.Item>
-      
-                      <NavDropdown.Divider />
-                      <NavDropdown.Item onClick={this.handleClick}>
-                        Log out
-                      </NavDropdown.Item>
-                    </NavDropdown>
-                  </Nav>
-                </Form>
-              </Container>
-            </Navbar>
-            <SideBar />
+        {/* NavBar */}
+        <Navbar bg="dark" variant="dark" fixed="top">
+          <Container>
+            <Navbar.Brand>Ourflow</Navbar.Brand>
+            <Form inline>
+
+              <Nav>
+
+                <NavDropdown title={this.state.admin.nama} id="basic-nav-dropdown">
+                  <NavDropdown.Item><Link to="/user">Profile</Link> </NavDropdown.Item>
+
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={this.handleClick}>
+                    Log out
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+            </Form>
+          </Container>
+        </Navbar>
+        <SideBar />
         <Card
           style={{ width: '50rem' }}
           className="bagan"
@@ -139,7 +164,7 @@ class AddBarang extends Component {
                   />
                   <div style={{ fontSize: 15, color: 'red' }}>
                     {this.validator.message('Kode Barang', this.state.kd_barang, 'required')}
-                    </div>
+                  </div>
                 </Col>
               </Form.Group>
 
@@ -157,9 +182,9 @@ class AddBarang extends Component {
                     id="nama_barang"
                     onChange={this.handleChange}
                     noValidate />
-                    <div style={{ fontSize: 15, color: 'red' }}>
+                  <div style={{ fontSize: 15, color: 'red' }}>
                     {this.validator.message('Nama Barang', this.state.nama_barang, 'required')}
-                    </div>
+                  </div>
                 </Col>
               </Form.Group>
 
@@ -176,9 +201,9 @@ class AddBarang extends Component {
                     name="satuan"
                     onChange={this.handleChange}
                     noValidate />
-                    <div style={{ fontSize: 15, color: 'red' }}>
+                  <div style={{ fontSize: 15, color: 'red' }}>
                     {this.validator.message('Satuan', this.state.satuan, 'required')}
-                    </div>
+                  </div>
                 </Col>
               </Form.Group>
               <Form.Group as={Row}>
@@ -194,9 +219,9 @@ class AddBarang extends Component {
                     name="harga_jual"
                     onChange={this.handleChange}
                     noValidate />
-                    <div style={{ fontSize: 15, color: 'red' }}>
+                  <div style={{ fontSize: 15, color: 'red' }}>
                     {this.validator.message('Harga Jual', this.state.harga_jual, 'required')}
-                    </div>
+                  </div>
                 </Col>
               </Form.Group>
               <Form.Group as={Row}>
@@ -212,9 +237,9 @@ class AddBarang extends Component {
                     name="harga_beli"
                     onChange={this.handleChange}
                     noValidate />
-                    <div style={{ fontSize: 15, color: 'red' }}>
+                  <div style={{ fontSize: 15, color: 'red' }}>
                     {this.validator.message('Harga Beli', this.state.harga_beli, 'required')}
-                    </div>
+                  </div>
                 </Col>
               </Form.Group>
               <Form.Group as={Row}>
@@ -230,9 +255,9 @@ class AddBarang extends Component {
                     name="stok"
                     onChange={this.handleChange}
                     noValidate />
-                    <div style={{ fontSize: 15, color: 'red' }}>
+                  <div style={{ fontSize: 15, color: 'red' }}>
                     {this.validator.message('Stok', this.state.stok, 'required')}
-                    </div>
+                  </div>
                 </Col>
               </Form.Group>
               <Form.Group as={Row}>
@@ -250,7 +275,7 @@ class AddBarang extends Component {
                   </Form.Control>
                   <div style={{ fontSize: 15, color: 'red' }}>
                     {this.validator.message('Status', this.state.status, 'required')}
-                    </div>
+                  </div>
                 </Col>
               </Form.Group>
               <Form.Group as={Row}>

@@ -1,24 +1,26 @@
 import { React, Component } from 'react'
-import { Button, Navbar, Nav, Jumbotron, Container, NavDropdown, Form } from 'react-bootstrap'
+import { Button, Navbar, Nav, Jumbotron, Container, NavDropdown, Form, Col, Image, Row } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCode } from '@fortawesome/free-solid-svg-icons'
 import { Redirect, Link } from 'react-router-dom'
 import SideBar from "./SideBar";
 import axios from 'axios'
+import image from '../Assets/Kodok Senyum.jpg'
 
 
 class Homepage extends Component {
   constructor(props) {
     super(props)
     const login = JSON.parse(localStorage.getItem('login'))
-    console.log(login)
     let loggedIn = true;
     if (login == null) {
       loggedIn = false;
     }
     this.state = {
       loggedIn,
-      state: {}
+      state: {},
+      admin : []
     }
-    console.log(this.state.state.admin)
   }
 
   state = {};
@@ -29,9 +31,9 @@ class Homepage extends Component {
         "Authorization": "Bearer " + login.token
       }
     }
-    axios.get('admin/' + login.kd_admin, axiosConfig)
+    axios.get('http://localhost:8000/admin/' + login.kd_admin, axiosConfig)
       .then(res => {
-        console.log(res.data.token)
+        console.log(res.data.data[0].nama)
         this.setState({
           admin: res.data.data[0]
         })
@@ -40,7 +42,9 @@ class Homepage extends Component {
         console.log(err)
       })
   }
-
+  componentDidMount () {
+    this.getAdmin()
+  }
   handleClick = e => {
     localStorage.removeItem("login")
     this.props.history.push("/login")
@@ -61,7 +65,7 @@ class Homepage extends Component {
 
               <Nav>
 
-                <NavDropdown title={data.nama} id="basic-nav-dropdown">
+                <NavDropdown title={this.state.admin.nama} id="basic-nav-dropdown">
                   <NavDropdown.Item><Link to="/user">Profile</Link> </NavDropdown.Item>
 
                   <NavDropdown.Divider />
@@ -78,13 +82,20 @@ class Homepage extends Component {
 
           <Jumbotron>
             <Container>
-              <h1>Welcome, {data.nama}</h1>
-              <p className="a">
-                Welcome to react bootstrap homepage, this is where you started
-              </p>
-              <p>
-                <Button variant="primary">Learn more</Button>
-              </p>
+              <Row>
+              <Col xs={1}>
+                <Image width={64} height={64} src={image} alt="INI GAMBAR" roundedCircle />
+              </Col>
+              <Col>
+                <h1>Welcome, {this.state.admin.nama}</h1>
+                <p className="a">
+                  Welcome to react bootstrap homepage, this is where you started
+                </p>
+                <p>
+                  <Button variant="primary">Learn more</Button>
+                </p>
+              </Col>
+              </Row>
             </Container>
           </Jumbotron>
         </div>

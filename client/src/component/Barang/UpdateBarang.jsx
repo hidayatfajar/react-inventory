@@ -28,9 +28,30 @@ export default class UpdateBarang extends Component {
             stok: "",
             status: null,
             data: {},
-            loggedIn
+            loggedIn,
+            admin : []
 
         }
+    }
+
+    getAdmin = () => {
+        const login = JSON.parse(localStorage.getItem('login'))
+        const axiosConfig = {
+            "headers": {
+                "Authorization": "Bearer " + login.token
+            }
+        }
+        axios.get('http://localhost:8000/admin/' + login.kd_admin, axiosConfig)
+            .then(res => {
+              console.log(res.data.data[0])
+                this.setState({
+                    admin: res.data.data[0]
+                })
+                console.log(this.state.admin)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     getData() {
@@ -60,6 +81,7 @@ export default class UpdateBarang extends Component {
     }
     componentDidMount() {
         this.getData();
+        this.getAdmin()
     }
 
     editData = e => {
@@ -140,7 +162,7 @@ export default class UpdateBarang extends Component {
 
               <Nav>
 
-                <NavDropdown title={data.nama} id="basic-nav-dropdown">
+                <NavDropdown title={this.state.admin.nama} id="basic-nav-dropdown">
                   <NavDropdown.Item><Link to="/user">Profile</Link> </NavDropdown.Item>
 
                   <NavDropdown.Divider />

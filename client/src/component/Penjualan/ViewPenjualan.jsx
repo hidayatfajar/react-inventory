@@ -21,6 +21,7 @@ export default class ViewPenjualan extends Component {
             id: this.props.match.params.kd_penjualan,
             data: {},
             loggedIn,
+            admin : []
         };
     }
     getPostAPI() {
@@ -44,10 +45,24 @@ export default class ViewPenjualan extends Component {
             })
     }
 
+    getAdmin = () => {
+        const login = JSON.parse(localStorage.getItem('login'))
+        axios.get('http://localhost:8000/admin/' + login.kd_admin)
+            .then(res => {
+              console.log(res.data.data[0])
+                this.setState({
+                    admin: res.data.data[0]
+                })
+                console.log(this.state.admin)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
 
     componentDidMount() {
         this.getPostAPI();
-
+        this.getAdmin()
     }
 
 
@@ -70,7 +85,7 @@ export default class ViewPenjualan extends Component {
 
             <Nav>
 
-              <NavDropdown title={data.nama} id="basic-nav-dropdown">
+              <NavDropdown title={this.state.admin.nama} id="basic-nav-dropdown">
                 <NavDropdown.Item><Link to="/user">Profile</Link> </NavDropdown.Item>
 
                 <NavDropdown.Divider />

@@ -25,8 +25,24 @@ export default class AddPembelian extends Component {
       tgl_pembelian: '',
       kd_supplier: '',
       status: '',
-      loggedIn
+      loggedIn, 
+      admin : []
     };
+  }
+
+  componentDidMount () {
+      const login = JSON.parse(localStorage.getItem('login'))
+      axios.get('http://localhost:8000/admin/' + login.kd_admin)
+          .then(res => {
+            console.log(res.data.data[0])
+              this.setState({
+                  admin: res.data.data[0]
+              })
+              console.log(this.state.admin)
+          })
+          .catch(err => {
+              console.log(err)
+          })
   }
 
   handleChange = e => {
@@ -105,7 +121,7 @@ export default class AddPembelian extends Component {
 
               <Nav>
 
-                <NavDropdown title={data.nama} id="basic-nav-dropdown">
+                <NavDropdown title={this.state.admin.nama} id="basic-nav-dropdown">
                   <NavDropdown.Item><Link to="/user">Profile</Link> </NavDropdown.Item>
 
                   <NavDropdown.Divider />
