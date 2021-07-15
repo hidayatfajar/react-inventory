@@ -37,6 +37,10 @@ class Login extends Component {
         this.props.history.push("/signup")
     }
 
+    handleTo = e => {
+        this.props.history.push("/")
+    }
+
     login = e => {
         e.preventDefault();
         const data = {
@@ -86,10 +90,8 @@ class Login extends Component {
                         <Navbar bg="dark" variant="dark" expands="md">
                             <Navbar.Brand>Ourflow</Navbar.Brand>
                             <Nav className="mr-auto">
-                                <Nav.Link>
-                                    <Link to="/">
+                                <Nav.Link onClick={this.handleTo}>
                                         Home
-                                    </Link>
                                 </Nav.Link>
                             </Nav>
                             <Nav>
@@ -159,6 +161,7 @@ class Login extends Component {
                                                     : null}
                                                 {this.validator.message('password', this.state.password, `required|min:4`, { className: 'text-danger' })}
                                             </div>
+                                            <br/>
                                             <Button
                                                 type="submit"
                                                 fullWidth

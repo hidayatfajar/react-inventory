@@ -134,7 +134,7 @@ export default class AddPenjualan extends Component {
         >
           <Card.Body>
             <Col md={-2}>
-              <Link to={"/penjualan/"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
+              <Link to={"/penjualan/"}><Button className="mr-2" variant="outline-primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
             </Col><br />
             <Form onSubmit={this.handleSubmit} noValidate>
 
@@ -221,7 +221,7 @@ export default class AddPenjualan extends Component {
               
               <Form.Group as={Row}>
                 <Col sm={{ span: 10, offset: 3 }}>
-                  <Button type="submit" >Tambah</Button>
+                  <Button variant="outline-primary" type="submit" >Tambah</Button>
                 </Col>
               </Form.Group>
             </Form>

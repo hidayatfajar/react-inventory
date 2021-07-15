@@ -14,10 +14,7 @@ import Signup from './Signup';
 
 import Welcome from './Welcome';
 import Logout from '../Sidebar/Logout';
-import Admin from './DataPerusahaan';
-import Admin1 from './Admin1';
 import AddBarang from './AddBarang';
-import SideBar from './SideBar';
 import Homepage from './Homepage';
 import AddPerusahaan from './AddPerusahaan';
 import DataSupplier from './DataSupplier'

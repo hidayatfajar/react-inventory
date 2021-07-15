@@ -89,7 +89,7 @@ class Homepage extends Component {
               <Col>
                 <h1>Welcome, {this.state.admin.nama}</h1>
                 <p className="a">
-                  Welcome to react bootstrap homepage, this is where you started
+                  This is our first website. This where we started
                 </p>
                 <p>
                   <Button variant="primary">Learn more</Button>

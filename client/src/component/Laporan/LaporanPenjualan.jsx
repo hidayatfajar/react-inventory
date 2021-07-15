@@ -12,7 +12,7 @@ import Swal from 'sweetalert2'
 // Component
 
 
-export default class Pembelian extends Component {
+export default class LaporanPembelian extends Component {
   constructor(props) {
     super(props)
     const login = JSON.parse(localStorage.getItem('login'))
@@ -106,7 +106,7 @@ export default class Pembelian extends Component {
     const data = this.state.data;
     const options = {
       paginationSize: 4,
-      pageStartIndex: 0,
+      pageStartIndex: 1,
       alwaysShowAllBtns: true, // Always show next and previous button
       // withFirstAndLast: false, // Hide the going to First and Last page button
       // hideSizePerPage: true, // Hide the sizePerPage dropdown always
@@ -201,7 +201,7 @@ export default class Pembelian extends Component {
                     <Form.Control type="date" name='akhir' id='akhir' value={this.state.akhir} onChange={this.handleChange} />
                     </Col>
                     <Col>
-                    <Button onClick={this.handleSearch}>Cari</Button>
+                    <Button variant="outline-primary" onClick={this.handleSearch}>Cari</Button>
                     </Col>
                   </Row>
                 </div>

@@ -182,7 +182,7 @@ export default class UpdateBarang extends Component {
                     <Card.Body>
 
                         <Col md={-2}>
-                            <Link to={"/barang/"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
+                            <Link to={"/barang/"}><Button className="mr-2" variant="outline-primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
                         </Col><br />
                         <Form onSubmit={this.editData} noValidate>
                             <Form.Group as={Row}>
@@ -311,7 +311,7 @@ export default class UpdateBarang extends Component {
                             </Form.Group>
                             <Form.Group as={Row}>
                                 <Col sm={{ span: 10, offset: 2 }}>
-                                    <Button type="submit" >Update</Button>
+                                    <Button variant="outline-primary" type="submit" >Update</Button>
                                 </Col>
                             </Form.Group>
                         </Form>

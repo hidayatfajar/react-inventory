@@ -38,6 +38,10 @@ export default class Signup extends Component {
     this.props.history.push('login')
   }
 
+  handleTo = e => {
+    this.props.history.push("/")
+}
+
   handleSubmit = e => {
     e.preventDefault();
     if (this.validator.allValid()) {
@@ -50,10 +54,10 @@ export default class Signup extends Component {
             password: ""
           })
           if (response.data.error === false)
-            Swal.fire(
-              'Success',
-              `${response.data.message}`,
-              'success'
+          Swal.fire(
+            'Success',
+            `${response.data.message}`,
+            'success'
             );
           else {
             Swal.fire(
@@ -62,6 +66,7 @@ export default class Signup extends Component {
               'error'
             );
           }
+          this.props.history.push("/login")
         })
     } else {
       this.validator.showMessages();
@@ -85,10 +90,8 @@ export default class Signup extends Component {
             <Navbar bg="dark" variant="dark">
               <Navbar.Brand>Ourflow</Navbar.Brand>
               <Nav className="mr-auto">
-                <Nav.Link>
-                  <Link to="/">
+                <Nav.Link onClick={this.handleTo}>
                     Home
-                  </Link>
                 </Nav.Link>
               </Nav>
               <Nav>

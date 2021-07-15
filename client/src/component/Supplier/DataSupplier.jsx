@@ -118,7 +118,7 @@ export default class DataSupplier extends Component {
     const data = this.state.data;
     const options = {
       paginationSize: 4,
-      pageStartIndex: 0,
+      pageStartIndex: 1,
       alwaysShowAllBtns: true, // Always show next and previous button
       // withFirstAndLast: false, // Hide the going to First and Last page button
       // hideSizePerPage: true, // Hide the sizePerPage dropdown always
@@ -166,13 +166,13 @@ export default class DataSupplier extends Component {
                 <Row>
 
                   <Col md={-2}>
-                    <Link to={"/view/supplier/" + row.kd_supplier}><Button className="mr-2" variant="success" block=""><FontAwesomeIcon icon={faEye} /></Button></Link>
+                    <Link to={"/view/supplier/" + row.kd_supplier}><Button className="mr-2" variant="outline-success" block=""><FontAwesomeIcon icon={faEye} /></Button></Link>
                   </Col>
                   <Col xs={-2}>
-                    <Link to={"/update/supplier/" + row.kd_supplier}><Button className="mr-2" variant="warning" block=""><FontAwesomeIcon icon={faEdit} /></Button></Link>
+                    <Link to={"/update/supplier/" + row.kd_supplier}><Button className="mr-2" variant="outline-warning" block=""><FontAwesomeIcon icon={faEdit} /></Button></Link>
                   </Col>
                   <Col md={-2}>
-                    <Button onClick={() => this.handleRemove(row.kd_supplier)} variant="danger" block=""><FontAwesomeIcon icon={faTrashAlt} /></Button>
+                    <Button onClick={() => this.handleRemove(row.kd_supplier)} variant="outline-danger" block=""><FontAwesomeIcon icon={faTrashAlt} /></Button>
                   </Col>
                 </Row>
               </Container>
@@ -226,7 +226,7 @@ export default class DataSupplier extends Component {
                   <Row>
 
                     <Col xs={2}>
-                      <Link to="/add/supplier"><Button className="mr-2" variant="primary" block="">Create</Button></Link>
+                      <Link to="/add/supplier"><Button className="mr-2" variant="outline-primary" block="">Create</Button></Link>
                     </Col>
                     {/* <Col xs={-1}>
                         <Button className="mr-2" variant="warning" block="">Update</Button>

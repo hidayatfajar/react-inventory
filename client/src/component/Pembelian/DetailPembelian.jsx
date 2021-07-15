@@ -200,7 +200,7 @@ export default class DetailPembelian extends Component {
                   <Row>
 
                     <Col xs={1}>
-                            <Link to={"/pembelian/"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
+                            <Link to={"/pembelian/"}><Button className="mr-2" variant="outline-primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
                     </Col>                     
 
                     <Col>

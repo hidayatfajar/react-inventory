@@ -91,7 +91,7 @@ export default class DataPembelian extends Component {
     const data = this.state.data;
     const options = {
       paginationSize: 4,
-      pageStartIndex: 0,
+      pageStartIndex: 1,
       alwaysShowAllBtns: true, // Always show next and previous button
       // withFirstAndLast: false, // Hide the going to First and Last page button
       // hideSizePerPage: true, // Hide the sizePerPage dropdown always
@@ -146,7 +146,7 @@ export default class DataPembelian extends Component {
                 <Row>
 
                   <Col md={-2}>
-                    <Link to={"/view/pembelian/" + row.kd_pembelian}><Button className="mr-2" variant="success" block=""><FontAwesomeIcon icon={faEye} /></Button></Link>
+                    <Link to={"/view/pembelian/" + row.kd_pembelian}><Button className="mr-2" variant="outline-success" block=""><FontAwesomeIcon icon={faEye} /></Button></Link>
                   </Col>
                 </Row>
               </Container>
@@ -200,10 +200,10 @@ export default class DataPembelian extends Component {
                   <Row>
 
                     <Col xs={1}>
-                      <Link to="/add/pembelian"><Button className="mr-2" variant="primary" block="">Create</Button></Link>
+                      <Link to="/add/pembelian"><Button className="mr-2" variant="outline-primary" block="">Create</Button></Link>
                     </Col>
                     <Col xs={2}>
-                      <Link to="/detail/pembelian"><Button className="mr-2" variant="secondary" block="">Detail</Button></Link>
+                      <Link to="/detail/pembelian"><Button className="mr-2" variant="outline-secondary" block="">Detail</Button></Link>
                     </Col>
                     <Col>
                       <div className="float-right">

@@ -166,7 +166,7 @@ export default class UpdatePerusahaan extends Component {
                     <Card.Body>
 
                         <Col md={-2}>
-                            <Link to={"/perusahaan/"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
+                            <Link to={"/perusahaan/"}><Button className="mr-2" variant="outline-primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
                         </Col><br />
                         <Form onSubmit={this.editData} noValidate>
                         <Form.Group as={Row}>
@@ -258,7 +258,7 @@ export default class UpdatePerusahaan extends Component {
                             </Form.Group>
                             <Form.Group as={Row}>
                                 <Col sm={{ span: 7, offset: 3 }}>
-                                    <Button type="submit" >Update</Button>
+                                    <Button variant="outline-primary" type="submit" >Update</Button>
                                 </Col>
                             </Form.Group>
                         </Form>
