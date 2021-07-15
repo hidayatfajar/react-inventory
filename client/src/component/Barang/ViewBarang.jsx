@@ -7,7 +7,7 @@ import { Form, Button, Container, Row, Col, NavDropdown, Navbar, Nav, Card } fro
 import SideBar from '../Pages/SideBar'
 import Swal from 'sweetalert2'
 
-export default class View extends Component {
+export default class ViewBarang extends Component {
 
     constructor(props) {
         super(props);
@@ -110,7 +110,7 @@ export default class View extends Component {
                     <Card.Body>
 
                         <Col md={-2}>
-                            <Link to={"/barang"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
+                            <Link to={"/barang"}><Button className="mr-2" variant="outline-primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
                         </Col><br />
                         <Form onSubmit={this.handleSubmit} noValidate>
 

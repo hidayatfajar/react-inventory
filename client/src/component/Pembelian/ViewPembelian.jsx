@@ -102,7 +102,7 @@ export default class ViewPembelian extends Component {
                     <Card.Body>
 
                         <Col md={-2}>
-                            <Link to={"/pembelian/"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
+                            <Link to={"/pembelian/"}><Button className="mr-2" variant="outline-primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
                         </Col><br />
                         <Form onSubmit={this.handleSubmit} noValidate>
 

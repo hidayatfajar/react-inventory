@@ -142,7 +142,7 @@ class AddBarang extends Component {
           <Card.Body>
 
             <Col md={-2}>
-              <Link to={"/barang/"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
+              <Link to={"/barang/"}><Button className="mr-2" variant="outline-primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
             </Col><br />
             <Form onSubmit={this.handleSubmit} noValidate>
 
@@ -280,7 +280,7 @@ class AddBarang extends Component {
               </Form.Group>
               <Form.Group as={Row}>
                 <Col sm={{ span: 10, offset: 2 }}>
-                  <Button type="submit" >Create</Button>
+                  <Button variant="outline-primary" type="submit" >Create</Button>
                 </Col>
               </Form.Group>
             </Form>

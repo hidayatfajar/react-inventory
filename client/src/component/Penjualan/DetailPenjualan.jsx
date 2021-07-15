@@ -198,7 +198,7 @@ export default class DetailPenjualan extends Component {
                   <Row>
 
                     <Col xs={1}>
-                            <Link to={"/Penjualan/"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
+                            <Link to={"/Penjualan/"}><Button className="mr-2" variant="outline-primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
                     </Col>                     
 
                     <Col>

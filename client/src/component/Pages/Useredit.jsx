@@ -8,7 +8,7 @@ import SideBar from '../Pages/SideBar'
 import Swal from 'sweetalert2'
 import SimpleReactValidator from 'simple-react-validator';
 
-export default class UpdatePerusahaan extends Component {
+export default class UserEdit extends Component {
 
     constructor(props) {
         super(props);
@@ -53,15 +53,15 @@ export default class UpdatePerusahaan extends Component {
             email: this.state.email,
             password: this.state.password
         }
+        if (this.validator.allValid()) {
         const kd_admin = this.state.kd_admin;
         console.log(this.state)
         axios.put(`http://localhost:8000/ubah/admin/${kd_admin}`, data)
             .then(data => {
-                if (this.validator.allValid()) {
                     e.preventDefault();
                     Swal.fire(
-                        'Good Job!',
-                        'Your data has been updated!',
+                        'Success!',
+                        'Updated, please login again!',
                         'success'
                     );
                     this.setState({
@@ -71,13 +71,9 @@ export default class UpdatePerusahaan extends Component {
                     })
                     this.validator.hideMessages();
                     console.log(this.state);
-                } else {
-                    this.validator.showMessages();
-                    // rerender to show messages for the first time
-                    // you can use the autoForceUpdate option to do this automatically`
-                    this.forceUpdate();
-                }
-                this.props.history.push("/user")
+                
+                localStorage.removeItem("login");
+                this.props.history.push("/login")
                 // this.props.history.push("/admin")
                 console.log(this.state)
             })
@@ -89,6 +85,12 @@ export default class UpdatePerusahaan extends Component {
                 );
                 console.log(err)
             })
+        } else {
+            this.validator.showMessages();
+            // rerender to show messages for the first time
+            // you can use the autoForceUpdate option to do this automatically`
+            this.forceUpdate();
+        }
     }
 
     handleChange = e => {
@@ -116,7 +118,7 @@ export default class UpdatePerusahaan extends Component {
 
                             <Nav>
 
-                                <NavDropdown title={this.state.nama} id="basic-nav-dropdown">
+                                <NavDropdown title={data.nama[0]} id="basic-nav-dropdown">
                                     <NavDropdown.Item><Link to="/user">Profile</Link> </NavDropdown.Item>
 
                                     <NavDropdown.Divider />
@@ -130,13 +132,13 @@ export default class UpdatePerusahaan extends Component {
                 </Navbar>
                 <SideBar />
                 <Card
-                    style={{ width: '41rem' }}
+                    style={{ width: '35rem' }}
                     className="bagan"
                 >
                     <Card.Body>
 
                         <Col md={-2}>
-                            <Link to={"/user/"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
+                            <Link to={"/user/"}><Button className="mr-2" variant="outline-primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
                         </Col><br />
                         <Form onSubmit={this.editData} noValidate>
                             <Form.Group as={Row}>
@@ -152,7 +154,9 @@ export default class UpdatePerusahaan extends Component {
                                         placeholder="Nama *"
                                         onChange={this.handleChange}
                                         noValidate />
-                                        {this.validator.message('Nama Perusahaan', this.state.nama, 'required')}
+                                        <div style={{ fontSize: 15, color: 'red' }}>
+                                        {this.validator.message('Nama', this.state.nama, 'required')}
+                                    </div>
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row}>
@@ -170,7 +174,7 @@ export default class UpdatePerusahaan extends Component {
                                         onChange={this.handleChange}
                                         noValidate />
                                     <div style={{ fontSize: 15, color: 'red' }}>
-                                        {this.validator.message('Nama Perusahaan', this.state.email, 'email|required')}
+                                        {this.validator.message('Email', this.state.email, 'email|required')}
                                     </div>
                                 </Col>
                             </Form.Group>
@@ -183,7 +187,7 @@ export default class UpdatePerusahaan extends Component {
 
                                         value={this.state.password}
                                         className=""
-                                        placeholder="Alamat *"
+                                        placeholder="Password *"
                                         name="password"
                                         onChange={this.handleChange}
                                         noValidate />
@@ -194,7 +198,7 @@ export default class UpdatePerusahaan extends Component {
                             </Form.Group>
                             <Form.Group as={Row}>
                                 <Col sm={{ span: 7, offset: 3 }}>
-                                    <Button type="submit" >Update</Button>
+                                    <Button type="submit" variant="outline-primary" >Update</Button>
                                 </Col>
                             </Form.Group>
                         </Form>

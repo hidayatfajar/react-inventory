@@ -28,11 +28,10 @@ export default class Welcome extends Component {
               <Navbar bg="dark" variant="dark">
                 <Navbar.Brand>Ourflow</Navbar.Brand>
                 <Nav className="mr-auto">
-                  <Nav.Link>
+                  {/* <Nav.Link>
                     <Link to="/">
-                      Home
                       </Link>
-                  </Nav.Link>
+                  </Nav.Link> */}
                 </Nav>
                   <Nav.Link>
                     <Link to="/login">
@@ -50,7 +49,7 @@ export default class Welcome extends Component {
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="https://placeimg.com/700/293/tech/greyscale"
+      src="https://placeimg.com/700/370/tech/greyscale"
       alt="First slide"
     />
     <Carousel.Caption>
@@ -61,7 +60,7 @@ export default class Welcome extends Component {
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="https://placeimg.com/700/293/tech"
+      src="https://placeimg.com/700/370/tech"
       alt="Second slide"
     />
 
@@ -73,7 +72,7 @@ export default class Welcome extends Component {
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="https://placeimg.com/700/293/tech/grayscale"
+      src="https://placeimg.com/700/370/tech/grayscale"
       alt="Third slide"
     />
     <Carousel.Caption>

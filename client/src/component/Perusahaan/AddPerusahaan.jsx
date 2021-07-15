@@ -10,7 +10,7 @@ import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Swal from 'sweetalert2'
 
-class CreatePerusahaan extends Component {
+class AddPerusahaan extends Component {
     constructor(props) {
         super(props);
         this.validator = new SimpleReactValidator({ autoForceUpdate: this });
@@ -134,7 +134,7 @@ class CreatePerusahaan extends Component {
                 className="bagan">
                     <Card.Body>
                         <Col md={-2}>
-                            <Link to={"/perusahaan/"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
+                            <Link to={"/perusahaan/"}><Button className="mr-2" variant="outline-primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
                         </Col><br />
                         <Form onSubmit={this.handleSubmit} noValidate>
                             <Form.Group as={Row}>
@@ -212,7 +212,7 @@ class CreatePerusahaan extends Component {
                             </Form.Group>
                             <Form.Group as={Row}>
                                 <Col sm={{ span: 7, offset: 3 }}>
-                                    <Button type="submit" >Create</Button>
+                                    <Button variant="outline-primary" type="submit" >Create</Button>
                                 </Col>
                             </Form.Group>
                         </Form>
@@ -223,4 +223,4 @@ class CreatePerusahaan extends Component {
     }
 }
 
-export default CreatePerusahaan;
+export default AddPerusahaan;

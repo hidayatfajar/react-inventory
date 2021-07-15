@@ -7,7 +7,7 @@ import axios from 'axios'
 import SideBar from '../Pages/SideBar'
 import Swal from 'sweetalert2'
 
-export default class View extends Component {
+export default class ViewSupplier extends Component {
 
     constructor(props) {
         super(props);
@@ -104,7 +104,7 @@ export default class View extends Component {
                     <Card.Body>
 
                         <Col md={-2}>
-                            <Link to={"/supplier/"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
+                            <Link to={"/supplier/"}><Button className="mr-2" variant="outline-primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
                         </Col><br />
                         <Form onSubmit={this.handleSubmit} noValidate>
 

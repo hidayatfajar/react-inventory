@@ -140,7 +140,7 @@ export default class AddPembelian extends Component {
         >
           <Card.Body>
             <Col md={-2}>
-              <Link to={"/pembelian/"}><Button className="mr-2" variant="primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
+              <Link to={"/pembelian/"}><Button className="mr-2" variant="outline-primary" block=""><FontAwesomeIcon icon={faLongArrowAltLeft} /></Button></Link>
             </Col><br />
             <Form onSubmit={this.handleSubmit} noValidate>
 
@@ -284,7 +284,7 @@ export default class AddPembelian extends Component {
               </Form.Group>
               <Form.Group as={Row}>
                 <Col sm={{ span: 10, offset: 2 }}>
-                  <Button type="submit" >Tambah</Button>
+                  <Button variant="outline-primary" type="submit" >Tambah</Button>
                 </Col>
               </Form.Group>
             </Form>
